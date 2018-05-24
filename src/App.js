@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 
-import TextEdit from './components/TextEdit.js';
+import TextEditContainer from './container/TextEditContainer.js';
 
 class App extends Component {
   render() {
@@ -11,7 +11,7 @@ class App extends Component {
           <h1>Welcome to TextEdit-App</h1>
         </header>
 
-        <TextEdit />
+        <TextEditContainer />
 
       </div>
     );
