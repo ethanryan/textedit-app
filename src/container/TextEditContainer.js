@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
 
-// import socketIOClient from 'socket.io-client' //need to import this??????
-
-import * as api from '../api'
+import io from "socket.io-client"; //this and below via: https://blog.cloudboost.io/creating-a-chat-web-app-using-express-js-react-js-socket-io-1b01100a8ea5
 
 import Clock from '../components/Clock.js';
 // import TextEdit from '../components/TextEdit.js';
 
-const io = require('socket.io-client') //initiate the request to open a socket connection with our Express server
-// const socket = io() //initiate the request to open a socket connection with our Express server
+const socket = io('localhost:8080'); //initiate the request to open a socket connection with our Express server, in server.js
 
 class TextEditContainer extends Component {
   constructor() {
@@ -16,72 +13,30 @@ class TextEditContainer extends Component {
     this.state = {
       timestamp: 'no timestamp yet',
       text: '',
-      allMessages: ''
     };
-  }
+    // this.socket = io('localhost:8080'); //better here, or above as a const?
+  } //end constructor
 
   componentDidMount() {
-    api.subscribeToTimer((err, timestamp) => this.setState({
-      timestamp
-    }));
-
-    api.subscribeToFormEdit((err, text) => this.setState({
-      text
-    }));
-
-    ////below here, who knows....
-
-    var socket = io();
-
-    //clock below
-    var el = document.getElementById('server-time');
-    socket.on('time', function(timeString) {
-      el.innerHTML = 'Server time: ' + timeString;
+    socket.on('time', timeString => {
+      console.log('timeString is::::', timeString)
+      this.setState({timestamp: timeString})
     });
-
-    //textarea below
-    var myFormEdit = document.getElementById("myFormEdit");
-    var textareaEdit = document.getElementById("textareaEdit"); //this is the textarea within the form
-
-    myFormEdit.addEventListener("keyup", function(event) {
-      event.preventDefault();
-      socket.emit('textarea update', textareaEdit.value); //below 'chat message' must match what is emitted here, i.e.: 'chat message' (emits sends the message to everyone, including the sender)
-      return false;
-    });
-
-    socket.on('textarea update', function(msg) {
-      textareaEdit.value = msg; //whenever a 'chat message' is emitted, the entire textarea (id=message) will be updated with the entire msg received
-    });
-
   } //componentDidMount
 
-  // componentDidUpdate() {
-  //   api.broadcastMessage((message, allMessages) => this.setState({
-  //     allMessages
-  //     // console.log('broadcastMessage called in TextEditContainer!!!....')
-  //     // members.forEach(m => m.emit('message', message))
-  //   }))
-  // }
-
-  handleTextChange = event => {
-    this.setState({
-      text: event.target.value,
-    });
-
-  // handleButtonClicked = event => {
-  //   console.log('buttonClicked!!!')
-  // }
-
-    // api.broadcastMessage((allMessages) => this.setState({
-    //   allMessages: event.target.value,
-    //   // console.log('broadcastMessage called in TextEditContainer!!!....')
-    //   // members.forEach(m => m.emit('message', message))
-    // }))
-
-  }
+  componentDidUpdate() { //does it help to have below in componentDidUpdate???
+    this.handleTextChange = event => {
+      event.preventDefault(); //need preventDefault???
+      socket.emit('textarea update', event.target.value); //below 'textarea update' must match what is emitted here, i.e.: 'textarea update' (emit sends the textarea update to everyone, including the sender)
+      this.setState({text: event.target.value});
+      socket.on('textarea update', textAreaEdit => {
+        this.setState({text: textAreaEdit}) //whenever a 'textarea update' is emitted, the entire textarea (this.state.text) will be updated with the entire textAreaEdit received
+      });
+    }
+  } //componentDidUpdate
 
   render() {
-    // console.log('in TextEditContainer, this.state is: ', this.state)
+    console.log('in TextEditContainer, this.state is: ', this.state)
     return (
       <div>
 
@@ -93,22 +48,17 @@ class TextEditContainer extends Component {
           timestamp={this.state.timestamp}
         />
 
-        <button
-          // onClick={(e) => this.handleButtonClicked(e)}
-        >
-          click this shit
-      </button>
-
         <form action="" id="myFormEdit">
           <textarea id="textareaEdit"
-            rows="10" cols="50"
+            rows="20" cols="80"
             placeholder="textarea inside TextEditContainer..."
             value={this.state.text}
             onChange={this.handleTextChange}
             >
-            </textarea>
-          </form>
+          </textarea>
 
+        </form>
+        
           <textarea
             rows="5" cols="50"
             value={this.state.text}
@@ -116,14 +66,9 @@ class TextEditContainer extends Component {
             >
           </textarea>
 
-            {/* <TextEdit
-              text={this.state.text}
-              handleTextChange={this.handleTextChange.bind(this)}
-            /> */}
+      </div>
+    );
+  }
+}
 
-          </div>
-        );
-      }
-    }
-
-    export default TextEditContainer;
+export default TextEditContainer;

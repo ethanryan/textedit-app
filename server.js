@@ -1,26 +1,38 @@
-//original way I got this working, via blog post: https://medium.com/dailyjs/combining-react-with-socket-io-for-real-time-goodness-d26168429a34
+//trying this, via this blog post: https://blog.cloudboost.io/creating-a-chat-web-app-using-express-js-react-js-socket-io-1b01100a8ea5
 
-const io = require('socket.io')();
+var express = require('express');
+var socket = require('socket.io');
 
-io.on('connection', (client) => {
-  console.log('a user connected'); //adding
-  client.on('disconnect', function() { //adding
-    console.log('user disconnected'); //adding
-  }); //adding
+var app = express();
 
-  //here can start emitting events to the client
-  client.on('subscribeToTimer', (interval) => {
-    console.log('client is subscribing to timer with interval ', interval);
-    setInterval(() => {
-      client.emit( 'timer', new Date() );
-    }, interval);
+server = app.listen(8080, function() {
+  console.log('server is running on port 8080')
+});
+
+io = socket(server);
+
+setInterval(() => io.emit('time', new Date().toTimeString()), 1000); //pushing out the current time on the server once a second, without waiting for a client's request
+
+// io.on('connection', (socket) => {
+//   console.log(socket.id);
+//
+//   socket.on('SEND_MESSAGE', function(data){
+//     io.emit('RECEIVE_MESSAGE', data);
+//   })
+// });
+
+io.on('connection', function(socket) {
+  console.log('socket.id is: ', socket.id);
+  console.log('a user connected');
+  socket.on('disconnect', function() {
+    console.log('user disconnected');
   });
-})
+});
 
 //below is for textarea update in myFormEdit
 io.on('connection', function(socket) {
   socket.on('textarea update', function(msg) {
-    console.log('textarea update: ' + msg);
+    console.log('textarea update is: ', msg);
   });
 });
 
@@ -29,11 +41,3 @@ io.on('connection', function(socket) {
     io.emit('textarea update', msg);
   });
 });
-
-const port = 8000;
-io.listen(port);
-console.log('server.js - listening on port: ', port);
-
-////////old way i was doing it above.....
-////////old way i was doing it above.....
-////////old way i was doing it above.....
