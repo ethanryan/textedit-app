@@ -11,7 +11,7 @@ class Clock extends Component {
         </h3>
 
         <p>
-          Time: {this.props.timestamp ? new Date(this.props.timestamp).toLocaleString('en-US', {
+          Time: {this.props.timestamp ? new Date(Date(this.props.timestamp)).toLocaleString('en-US', {
             weekday: 'short',
             month: 'short',
             day: 'numeric',
