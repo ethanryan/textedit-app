@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 class TextEdit extends Component {
   render() {
+    // console.log('in TextEdit, this.props is: ', this.props)
     return (
       <div>
 
@@ -12,6 +13,8 @@ class TextEdit extends Component {
         <textarea
           rows="10" cols="50"
           placeholder="Write something here..."
+          value={this.props.text}
+          onChange={this.handleTextChange}
           >
         </textarea>
 
