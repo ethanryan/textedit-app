@@ -27,10 +27,10 @@ class TextEditContainer extends Component {
   componentDidUpdate() { //does it help to have below in componentDidUpdate???
     this.handleTextChange = event => {
       event.preventDefault(); //need preventDefault???
-      socket.emit('textarea update', event.target.value); //below 'textarea update' must match what is emitted here, i.e.: 'textarea update' (emit sends the textarea update to everyone, including the sender)
-      this.setState({text: event.target.value});
-      socket.on('textarea update', textAreaEdit => {
-        this.setState({text: textAreaEdit}) //whenever a 'textarea update' is emitted, the entire textarea (this.state.text) will be updated with the entire textAreaEdit received
+      socket.emit('TEXTAREA_UPDATE', event.target.value); //below 'TEXTAREA_UPDATE' must match what is emitted here, i.e.: 'TEXTAREA_UPDATE' (emit sends the TEXTAREA_UPDATE to everyone, including the sender)
+      // this.setState({text: event.target.value});
+      socket.on('TEXTAREA_UPDATE', textAreaEdit => {
+        this.setState({text: textAreaEdit}) //whenever a 'TEXTAREA_UPDATE' is emitted, the entire textarea (this.state.text) will be updated with the entire textAreaEdit received
       });
     }
   } //componentDidUpdate
@@ -58,7 +58,7 @@ class TextEditContainer extends Component {
           </textarea>
 
         </form>
-        
+
           <textarea
             rows="5" cols="50"
             value={this.state.text}

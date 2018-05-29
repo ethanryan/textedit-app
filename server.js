@@ -31,13 +31,13 @@ io.on('connection', function(socket) {
 
 //below is for textarea update in myFormEdit
 io.on('connection', function(socket) {
-  socket.on('textarea update', function(msg) {
-    console.log('textarea update is: ', msg);
+  socket.on('TEXTAREA_UPDATE', function(msg) {
+    console.log('TEXTAREA_UPDATE is: ', msg);
   });
 });
 
 io.on('connection', function(socket) {
-  socket.on('textarea update', function(msg) {
-    io.emit('textarea update', msg);
+  socket.on('TEXTAREA_UPDATE', function(msg) {
+    io.emit('TEXTAREA_UPDATE', msg);
   });
 });
