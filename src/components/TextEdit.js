@@ -11,10 +11,9 @@ class TextEdit extends Component {
         </h3>
 
         <textarea
-          rows="10" cols="50"
-          placeholder="Write something here..."
-          value={this.props.text}
-          onChange={this.handleTextChange}
+          rows="5" cols="50"
+          value={this.props.textFromContainer}
+          readOnly
           >
         </textarea>
 

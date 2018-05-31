@@ -3,7 +3,8 @@ import React, { Component } from 'react';
 import io from "socket.io-client"; //this and below via: https://blog.cloudboost.io/creating-a-chat-web-app-using-express-js-react-js-socket-io-1b01100a8ea5
 
 import Clock from '../components/Clock.js';
-// import TextEdit from '../components/TextEdit.js';
+import TextEdit from '../components/TextEdit.js';
+
 
 const socket = io('localhost:8080'); //initiate the request to open a socket connection with our Express server, in server.js
 
@@ -19,24 +20,33 @@ class TextEditContainer extends Component {
 
   componentDidMount() {
     socket.on('time', timeString => {
-      console.log('timeString is::::', timeString)
+      // console.log('timeString is::::', timeString)
       this.setState({timestamp: timeString})
     });
   } //componentDidMount
 
+  handleTextChange = event => {
+    event.preventDefault(); //need preventDefault???
+    socket.emit('TEXTAREA_UPDATE', event.target.value); //below 'TEXTAREA_UPDATE' must match what is emitted here, i.e.: 'TEXTAREA_UPDATE' (emit sends the TEXTAREA_UPDATE to everyone, including the sender)
+    // this.setState({text: event.target.value});
+    socket.on('TEXTAREA_UPDATE', textAreaEdit => {
+      this.setState({text: textAreaEdit}) //whenever a 'TEXTAREA_UPDATE' is emitted, the entire textarea (this.state.text) will be updated with the entire textAreaEdit received
+    });
+  }
+
   componentDidUpdate() { //does it help to have below in componentDidUpdate???
-    this.handleTextChange = event => {
-      event.preventDefault(); //need preventDefault???
-      socket.emit('TEXTAREA_UPDATE', event.target.value); //below 'TEXTAREA_UPDATE' must match what is emitted here, i.e.: 'TEXTAREA_UPDATE' (emit sends the TEXTAREA_UPDATE to everyone, including the sender)
-      // this.setState({text: event.target.value});
-      socket.on('TEXTAREA_UPDATE', textAreaEdit => {
-        this.setState({text: textAreaEdit}) //whenever a 'TEXTAREA_UPDATE' is emitted, the entire textarea (this.state.text) will be updated with the entire textAreaEdit received
-      });
-    }
+    // this.handleTextChange = event => {
+    //   event.preventDefault(); //need preventDefault???
+    //   socket.emit('TEXTAREA_UPDATE', event.target.value); //below 'TEXTAREA_UPDATE' must match what is emitted here, i.e.: 'TEXTAREA_UPDATE' (emit sends the TEXTAREA_UPDATE to everyone, including the sender)
+    //   // this.setState({text: event.target.value});
+    //   socket.on('TEXTAREA_UPDATE', textAreaEdit => {
+    //     this.setState({text: textAreaEdit}) //whenever a 'TEXTAREA_UPDATE' is emitted, the entire textarea (this.state.text) will be updated with the entire textAreaEdit received
+    //   });
+    // }
   } //componentDidUpdate
 
   render() {
-    console.log('in TextEditContainer, this.state is: ', this.state)
+    // console.log('in TextEditContainer, this.state is: ', this.state)
     return (
       <div>
 
@@ -50,7 +60,8 @@ class TextEditContainer extends Component {
 
         <form action="" id="myFormEdit">
           <textarea id="textareaEdit"
-            rows="20" cols="80"
+            rows="10"
+            cols="80"
             placeholder="textarea inside TextEditContainer..."
             value={this.state.text}
             onChange={this.handleTextChange}
@@ -59,16 +70,20 @@ class TextEditContainer extends Component {
 
         </form>
 
-          <textarea
+          <TextEdit
+            textFromContainer={this.state.text}
+          />
+
+          {/* <textarea
             rows="5" cols="50"
             value={this.state.text}
             readOnly
             >
-          </textarea>
+            </textarea> */}
 
-      </div>
-    );
-  }
-}
+          </div>
+        );
+      }
+    }
 
-export default TextEditContainer;
+    export default TextEditContainer;
