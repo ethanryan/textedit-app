@@ -41,3 +41,41 @@ io.on('connection', function(socket) {
     io.emit('TEXTAREA_UPDATE', msg);
   });
 });
+
+
+//////below is for Yjs:::::
+
+var Y = require('yjs')
+require('y-memory')(Y) // extend Y with the memory module
+require('y-websockets-client')(Y)
+require('y-array')(Y)
+require('y-map')(Y)
+// ..
+// do the same for all modules you want to use
+
+Y({
+  db: {
+    name: 'memory' // store the shared data in memory
+  },
+  connector: {
+    name: 'websockets-client', // use the websockets connector
+    room: 'my room',            // Instances connected to the same room share data
+    // url: 'localhost:1234' // specify your own server destination
+    // url: 'localhost:3000' //localhost:3000 or localhost:8080, my node server??
+    //if I don't specify options.connector.url, it connects to one of the servers Yjs provides...
+  },
+  share: { // specify the shared content
+    map: 'Map',    // y.share.map is of type Y.Map
+    array: 'Array' // y.share.array is of type Y.Array
+  },
+  sourceDir: '/bower_components' // where the modules are (browser only)
+}).then(function (y) { //this returns a promise...
+  /*
+  At this point Yjs is successfully initialized.
+  Try it out in your browser console!
+  */
+  window.y = y
+  console.log('Yjs instance ready!!!!!!!!!!')
+  y.share.map // is an Y.Map instance
+  y.share.array // is an Y.Array instance
+})

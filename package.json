@@ -12,6 +12,7 @@
     "y-map": "^10.1.3",
     "y-memory": "^8.0.9",
     "y-webrtc": "^8.0.7",
+    "y-websockets-client": "^8.0.16",
     "yjs": "^12.3.3"
   },
   "scripts": {
