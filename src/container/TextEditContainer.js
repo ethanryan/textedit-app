@@ -50,7 +50,8 @@ class TextEditContainer extends Component {
 
         <form action="" id="myFormEdit">
           <textarea id="textareaEdit"
-            rows="20" cols="80"
+            rows="10"
+            cols="80"
             placeholder="textarea inside TextEditContainer..."
             value={this.state.text}
             onChange={this.handleTextChange}
