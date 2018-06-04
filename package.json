@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "ajv": "^6.5.0",
     "react": "^16.4.0",
     "react-dom": "^16.4.0",
     "react-scripts": "1.1.4",
@@ -11,6 +12,7 @@
     "y-array": "^10.1.4",
     "y-map": "^10.1.3",
     "y-memory": "^8.0.9",
+    "y-text": "^9.5.1",
     "y-webrtc": "^8.0.7",
     "y-websockets-client": "^8.0.16",
     "yjs": "^12.3.3"

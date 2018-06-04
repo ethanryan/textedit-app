@@ -1,12 +1,46 @@
 import React, { Component } from 'react';
 
-import io from "socket.io-client"; //this and below via: https://blog.cloudboost.io/creating-a-chat-web-app-using-express-js-react-js-socket-io-1b01100a8ea5
-
 import Clock from '../components/Clock.js';
 import TextEdit from '../components/TextEdit.js';
+// import io from "socket.io-client"; //this and below via: https://blog.cloudboost.io/creating-a-chat-web-app-using-express-js-react-js-socket-io-1b01100a8ea5
+
+// const socket = io('localhost:8080'); //initiate the request to open a socket connection with our Express server, in server.js
+
+const Y = require('yjs')
+
+// Yjs plugins
+require('y-memory')(Y)
+require('y-array')(Y)
+require('y-text')(Y)
+require('y-websockets-client')(Y) //i imagine i need to require this too...
+//will also need a connector here... not y-ipfs-connector, but something with socket.io
+
+var io = Y['websockets-client'].io //need to get this.....
 
 
-const socket = io('localhost:8080'); //initiate the request to open a socket connection with our Express server, in server.js
+var link = 'http://localhost:1234'
+// var link = 'https://textarea-yjs-websockets-server.herokuapp.com/'
+
+// create a connection
+var connection = io(link) //need to include LINK within io()...
+
+Y({
+  db: {
+    name: 'memory' // use the memory db adapter
+  },
+  connector: {
+    name: 'websockets-client', // use the websockets-client connector
+    room: 'Textarea-example-dev',
+    socket: connection, //passing connection above as the socket...
+    url: link // the connection endpoint (see y-websockets-server)
+  },
+  share: {
+    textarea: 'Text' // y.share.textarea is of type Y.Text
+  }
+}).then(function (y) {
+  // bind the textarea to a shared text element
+  y.share.textarea.bind(document.getElementById('textareaEdit'))
+})
 
 class TextEditContainer extends Component {
   constructor() {
@@ -15,35 +49,18 @@ class TextEditContainer extends Component {
       timestamp: '',
       text: '',
     };
-    // this.socket = io('localhost:8080'); //better here, or above as a const?
   } //end constructor
 
   componentDidMount() {
-    socket.on('time', timeString => {
-      // console.log('timeString is::::', timeString)
-      this.setState({timestamp: timeString})
-    });
+    // socket.on('time', timeString => {
+    //   // console.log('timeString is::::', timeString)
+    //   this.setState({timestamp: timeString})
+    // });
   } //componentDidMount
 
   handleTextChange = event => {
-    event.preventDefault(); //need preventDefault???
-    socket.emit('TEXTAREA_UPDATE', event.target.value); //below 'TEXTAREA_UPDATE' must match what is emitted here, i.e.: 'TEXTAREA_UPDATE' (emit sends the TEXTAREA_UPDATE to everyone, including the sender)
-    // this.setState({text: event.target.value});
-    socket.on('TEXTAREA_UPDATE', textAreaEdit => {
-      this.setState({text: textAreaEdit}) //whenever a 'TEXTAREA_UPDATE' is emitted, the entire textarea (this.state.text) will be updated with the entire textAreaEdit received
-    });
+    this.setState({text: event.target.value});
   }
-
-  componentDidUpdate() { //does it help to have below in componentDidUpdate???
-    // this.handleTextChange = event => {
-    //   event.preventDefault(); //need preventDefault???
-    //   socket.emit('TEXTAREA_UPDATE', event.target.value); //below 'TEXTAREA_UPDATE' must match what is emitted here, i.e.: 'TEXTAREA_UPDATE' (emit sends the TEXTAREA_UPDATE to everyone, including the sender)
-    //   // this.setState({text: event.target.value});
-    //   socket.on('TEXTAREA_UPDATE', textAreaEdit => {
-    //     this.setState({text: textAreaEdit}) //whenever a 'TEXTAREA_UPDATE' is emitted, the entire textarea (this.state.text) will be updated with the entire textAreaEdit received
-    //   });
-    // }
-  } //componentDidUpdate
 
   render() {
     // console.log('in TextEditContainer, this.state is: ', this.state)
