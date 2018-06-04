@@ -12,7 +12,7 @@ class TextEditContainer extends Component {
   constructor() {
     super()
     this.state = {
-      timestamp: 'no timestamp yet',
+      timestamp: '',
       text: '',
     };
     // this.socket = io('localhost:8080'); //better here, or above as a const?
