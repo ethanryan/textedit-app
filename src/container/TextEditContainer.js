@@ -24,6 +24,9 @@ var link = 'http://localhost:1234'
 // create a connection
 var connection = io(link) //need to include LINK within io()...
 
+///for room1::::::::
+///for room1::::::::
+///for room1::::::::
 Y({
   db: {
     name: 'memory' // use the memory db adapter
@@ -39,8 +42,35 @@ Y({
   }
 }).then(function (y) {
   // bind the textarea to a shared text element
-  y.share.textarea.bind(document.getElementById('textareaEdit'))
+  y.share.textarea.bind(document.getElementById('room1'))
 })
+
+///for room2::::::::
+///for room2::::::::
+///for room2::::::::
+Y({
+  db: {
+    name: 'memory' // use the memory db adapter
+  },
+  connector: {
+    name: 'websockets-client', // use the websockets-client connector
+    room: 'room2',
+    socket: connection, //passing connection above as the socket...
+    url: link // the connection endpoint (see y-websockets-server)
+  },
+  share: {
+    textarea: 'Text' // y.share.textarea is of type Y.Text
+  }
+}).then(function (y) {
+  // bind the textarea to a shared text element
+  y.share.textarea.bind(document.getElementById('room2'))
+})
+
+
+
+
+
+
 
 class TextEditContainer extends Component {
   constructor() {
@@ -48,6 +78,8 @@ class TextEditContainer extends Component {
     this.state = {
       timestamp: '',
       text: '',
+      room1: '',
+      room2: '',
     };
   } //end constructor
 
@@ -59,7 +91,8 @@ class TextEditContainer extends Component {
   } //componentDidMount
 
   handleTextChange = event => {
-    this.setState({text: event.target.value});
+    // this.setState({text: event.target.value});
+    this.setState({ [event.target.name]: event.target.value });
   }
 
   render() {
@@ -75,17 +108,34 @@ class TextEditContainer extends Component {
           timestamp={this.state.timestamp}
         />
 
-        <form action="" id="myFormEdit">
-          <textarea id="textareaEdit"
+        {/* <form action="" id="myFormEdit"> */}
+        <div>
+        Room 1:
+          <textarea
+            id="room1"
             rows="10"
             cols="80"
             placeholder="textarea inside TextEditContainer..."
-            value={this.state.text}
+            value={this.state.room1}
             onChange={this.handleTextChange}
+            name="room1"
+            >
+          </textarea>
+        </div>
+
+          Room 2:
+          <textarea
+            id="room2"
+            rows="10"
+            cols="80"
+            placeholder="textarea inside TextEditContainer..."
+            value={this.state.room2}
+            onChange={this.handleTextChange}
+            name="room2"
             >
           </textarea>
 
-        </form>
+        {/* </form> */}
 
           <TextEdit
             textFromContainer={this.state.text}
