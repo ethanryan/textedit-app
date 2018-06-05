@@ -76,31 +76,34 @@ class TextEdit extends Component {
 
   componentWillReceiveProps(nextProps) {
     console.log('TextEdit - componentWillReceiveProps - nextProps is: ...', nextProps)
-    if (nextProps !== this.props) {
-      console.log('PROPS ARE DIFFERENT ~~~ FUCK WE GOTTA DO SOMETHING!!!!')
-    }
-    //   var that = this; //setting 'this' to 'that' so scope of 'this' doesn't get lost in promise below
-    //
-    //   Y({
-    //     db: {
-    //       name: 'memory' // use the memory db adapter
-    //     },
-    //     connector: {
-    //       name: 'websockets-client', // use the websockets-client connector
-    //       // room: 'room3',
-    //       room: nextProps.showRoom, //not sure about this.... <<<<<------------------------
-    //       socket: connection, //passing connection above as the socket...
-    //       url: link // the connection endpoint (see y-websockets-server)
-    //     },
-    //     share: {
-    //       textarea: 'Text' // y.share.textarea is of type Y.Text
-    //     }
-    //   }).then(function (y) {
-    //     // bind the textarea to a shared text element
-    //     y.share.textarea.bind(document.getElementById(that.props.showRoom)) //not sure about this....  <<<<<------------------------
-    //     // y.share.textarea.bind(document.querySelector('textarea'))
-    //   })
-    // }
+
+    if (nextProps.showRoom !== this.props.showRoom) {
+      console.log('>>>>>>>PROPS ARE DIFFERENT ~~~ FUCK WE GOTTA DO SOMETHING!!!!')
+      console.log('nextProps.showRoom is: ', nextProps.showRoom)
+      console.log('this.props.showRoom is: ', this.props.showRoom)
+
+      // var that = this; //setting 'this' to 'that' so scope of 'this' doesn't get lost in promise below
+      //
+      // Y({
+      //   db: {
+      //     name: 'memory' // use the memory db adapter
+      //   },
+      //   connector: {
+      //     name: 'websockets-client', // use the websockets-client connector
+      //     // room: 'room3',
+      //     room: nextProps.showRoom, //not sure about this.... <<<<<------------------------
+      //     socket: connection, //passing connection above as the socket...
+      //     url: link // the connection endpoint (see y-websockets-server)
+      //   },
+      //   share: {
+      //     textarea: 'Text' // y.share.textarea is of type Y.Text
+      //   }
+      // }).then(function (y) {
+      //   // bind the textarea to a shared text element
+      //   y.share.textarea.bind(document.getElementById(nextProps.showRoom)) //not sure about this....  <<<<<------------------------
+      //   // y.share.textarea.bind(document.querySelector('textarea'))
+      // })
+    } //end if statement...
   }
 
   render() {

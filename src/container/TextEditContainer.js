@@ -122,6 +122,20 @@ class TextEditContainer extends Component {
     console.log('setState to showRoom: ', buttonValue)
   }
 
+  colorBorder(string) {
+    var colorBorder
+    if (string === 'room1') {
+      colorBorder = {border:'2px solid blue',}
+    }
+    if (string === 'room2') {
+      colorBorder = {border:'2px solid red',}
+    }
+    if (string === 'room3') {
+      colorBorder = {border:'2px solid yellow',}
+    }
+    return colorBorder
+  }
+
 
   render() {
 
@@ -161,10 +175,12 @@ class TextEditContainer extends Component {
         <button id="showRoom3" name="room3" onClick={this.onButtonClick} style={yellowButton}>Show Room 3</button>
 
         <p>
-          Active Room: {this.state.showRoom ? this.state.showRoom : 'showRoom here'}
+          Active Room: <span style={this.colorBorder(this.state.showRoom)}>
+            {this.state.showRoom}
+          </span>
         </p>
 
-        <div>
+        <div style={this.colorBorder(this.state.showRoom)}>
           <TextEdit
             // textFromContainer={this.state.text}
             // valueFromContainer={this.state.text}
@@ -175,18 +191,13 @@ class TextEditContainer extends Component {
           />
         </div>
 
-        <div>
-          {/* Room 2: */}
           <TextEdit
             showRoom={'room2'} //this is only prop that TextEdit needs!!!
           />
-        </div>
-        <div>
-          {/* Room 3: */}
+
           <TextEdit
             showRoom={'room3'} //this is only prop that TextEdit needs!!!
           />
-        </div>
 
       </div>
     );
