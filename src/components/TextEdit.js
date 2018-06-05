@@ -18,7 +18,29 @@ var link = 'http://localhost:1234'
 // create a connection
 var connection = io(link) //need to include LINK within io()...
 
-
+///for room3::::::::
+///for room3::::::::
+///for room3::::::::
+// Y({
+//   db: {
+//     name: 'memory' // use the memory db adapter
+//   },
+//   connector: {
+//     name: 'websockets-client', // use the websockets-client connector
+//     // room: 'room3',
+//     room: this.props.showRoom,
+//     socket: connection, //passing connection above as the socket...
+//     url: link // the connection endpoint (see y-websockets-server)
+//   },
+//   share: {
+//     textarea: 'Text' // y.share.textarea is of type Y.Text
+//   }
+// }).then(function (y) {
+//   // bind the textarea to a shared text element
+//   // y.share.textarea.bind(document.getElementById('room3'))
+//   y.share.textarea.bind(document.getElementById(this.props.showRoom))
+//   // y.share.textarea.bind(document.querySelector('textarea'))
+// })
 
 
 
@@ -27,32 +49,8 @@ var connection = io(link) //need to include LINK within io()...
 class TextEdit extends Component {
 
   componentDidMount() {
-    // console.log('componentDidMount - in TextEdit, this.props is: ...', this.props)
-
-    // Y({
-    //   db: {
-    //     name: 'memory' // use the memory db adapter
-    //   },
-    //   connector: {
-    //     name: 'websockets-client', // use the websockets-client connector
-    //     // room: 'Textarea-example-dev',
-    //     room: this.props.idFromContainer,
-    //     socket: connection, //passing connection above as the socket...
-    //     url: link // the connection endpoint (see y-websockets-server)
-    //   },
-    //   share: {
-    //     textarea: 'Text' // y.share.textarea is of type Y.Text
-    //   }
-    // }).then(function (y) {
-    //   // bind the textarea to a shared text element
-    //   // y.share.textarea.bind(document.getElementById('room1'))
-    //   y.share.textarea.bind(document.querySelector('textarea'))
-    // })
-
-  } //componentDidMount
-
-  render() {
-    console.log('in TextEdit, this.props is: ', this.props)
+    console.log('TextEdit - componentDidMount - this.props is: ...', this.props)
+    var that = this; //setting 'this' to 'that' so scope of 'this' doesn't get lost in promise below
 
     Y({
       db: {
@@ -60,8 +58,8 @@ class TextEdit extends Component {
       },
       connector: {
         name: 'websockets-client', // use the websockets-client connector
-        // room: 'Textarea-example-dev',
-        room: this.props.idFromContainer,
+        // room: 'room3',
+        room: this.props.showRoom,
         socket: connection, //passing connection above as the socket...
         url: link // the connection endpoint (see y-websockets-server)
       },
@@ -70,9 +68,43 @@ class TextEdit extends Component {
       }
     }).then(function (y) {
       // bind the textarea to a shared text element
-      // y.share.textarea.bind(document.getElementById('room1'))
-      y.share.textarea.bind(document.querySelector('textarea'))
+      y.share.textarea.bind(document.getElementById(that.props.showRoom))
+      // y.share.textarea.bind(document.querySelector('textarea'))
     })
+
+  } //componentDidMount
+
+  componentWillReceiveProps(nextProps) {
+    console.log('TextEdit - componentWillReceiveProps - nextProps is: ...', nextProps)
+    if (nextProps !== this.props) {
+      console.log('PROPS ARE DIFFERENT ~~~ FUCK WE GOTTA DO SOMETHING!!!!')
+    }
+    //   var that = this; //setting 'this' to 'that' so scope of 'this' doesn't get lost in promise below
+    //
+    //   Y({
+    //     db: {
+    //       name: 'memory' // use the memory db adapter
+    //     },
+    //     connector: {
+    //       name: 'websockets-client', // use the websockets-client connector
+    //       // room: 'room3',
+    //       room: nextProps.showRoom, //not sure about this.... <<<<<------------------------
+    //       socket: connection, //passing connection above as the socket...
+    //       url: link // the connection endpoint (see y-websockets-server)
+    //     },
+    //     share: {
+    //       textarea: 'Text' // y.share.textarea is of type Y.Text
+    //     }
+    //   }).then(function (y) {
+    //     // bind the textarea to a shared text element
+    //     y.share.textarea.bind(document.getElementById(that.props.showRoom)) //not sure about this....  <<<<<------------------------
+    //     // y.share.textarea.bind(document.querySelector('textarea'))
+    //   })
+    // }
+  }
+
+  render() {
+    console.log('in TextEdit, this.props is: ', this.props)
 
     return (
       <div>
@@ -83,19 +115,20 @@ class TextEdit extends Component {
 
         <div>
         <span>
-          # {this.props.idFromContainer ? this.props.idFromContainer : "room number goes here..."}:
+          # {this.props.showRoom ? this.props.showRoom : "room number goes here..."}:
         </span>
+
           <textarea
-            id={this.props.idFromContainer ? this.props.idFromContainer : "room number goes here..."}
-            name={this.props.idFromContainer ? this.props.idFromContainer : "room name goes here..."}
-            rows="20"
+            id={this.props.showRoom ? this.props.showRoom : "room name goes here..."}
+            // name={this.props.showRoom ? this.props.showRoom : "room name goes here..."}
+            rows="2"
             cols="80"
             placeholder="textarea inside TextEditContainer..."
-            // value={this.props.valueFromContainer}
-            // onChange={this.props.handleTextChange}
             >
           </textarea>
+
         </div>
+
         {/* <div>
         Room 1: //this.props.room or whatever...
           <textarea

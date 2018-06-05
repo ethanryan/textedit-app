@@ -8,8 +8,8 @@ import TextEdit from '../components/TextEdit.js';
 // const socket = io('localhost:8080'); //initiate the request to open a socket connection with our Express server, in server.js
 
 // const Y = require('yjs')
-//
-// // Yjs plugins
+
+// Yjs plugins
 // require('y-memory')(Y)
 // require('y-array')(Y)
 // require('y-text')(Y)
@@ -25,9 +25,10 @@ import TextEdit from '../components/TextEdit.js';
 // // create a connection
 // var connection = io(link) //need to include LINK within io()...
 
-///for room1::::::::
-///for room1::::::::
-///for room1::::::::
+
+// //for room1::::::::
+// //for room1::::::::
+// //for room1::::::::
 // Y({
 //   db: {
 //     name: 'memory' // use the memory db adapter
@@ -83,25 +84,27 @@ class TextEditContainer extends Component {
       timestamp: '',
       text: '',
       choice: '',
-      // room1: '',
-      // room2: '',
+      // room1: '', //this or text, above??
+      // room2: '', //this or text, above??
+      // showRoom: '', //default
       showRoom: 'room1', //default
     };
-    this.handleTextChange = this.handleTextChange.bind(this)
+    // this.handleTextChange = this.handleTextChange.bind(this)
+    this.onChoiceClick = this.onChoiceClick.bind(this)
     this.onButtonClick = this.onButtonClick.bind(this)
   } //end constructor
 
-  componentDidMount() {
-    // console.log('after componentDidMount - in TextEditContainer, this.state is: ', this.state)
-  } //componentDidMount
+  // componentDidMount() {
+  //   // console.log('after componentDidMount - in TextEditContainer, this.state is: ', this.state)
+  // } //componentDidMount
 
-  handleTextChange = event => {
-    console.log('text event.target.name: ', event.target.name); // the name of the element (ex: 'room1')
-    // console.log('Text event.target.value', event.target.value); // the value of the element
-    this.setState({text: event.target.value});
-    // const textValue = event.target.value
-    // this.setState({ [event.target.name]: textValue });
-  }
+  // handleTextChange = event => {
+  //   console.log('text event.target.name: ', event.target.name); // the name of the element (ex: 'room1')
+  //   // console.log('Text event.target.value', event.target.value); // the value of the element
+  //   // this.setState({text: event.target.value});
+  //   const textValue = event.target.value
+  //   this.setState({ [event.target.name]: textValue });
+  // }
 
   onChoiceClick = event => {
     // console.log('button event.target.name: ', event.target.name)
@@ -121,6 +124,7 @@ class TextEditContainer extends Component {
 
 
   render() {
+
     const blueButton = {
       border:'2px solid blue',
     }
@@ -130,6 +134,7 @@ class TextEditContainer extends Component {
     const yellowButton = {
       border:'2px solid yellow',
     }
+
     console.log('in TextEditContainer, this.state is: ', this.state)
     return (
       <div>
@@ -159,100 +164,33 @@ class TextEditContainer extends Component {
           Active Room: {this.state.showRoom ? this.state.showRoom : 'showRoom here'}
         </p>
 
-        {/* <form action="" id="myFormEdit"> */}
-
-        {/* <div>
-        Room 1:
-          <textarea
-            id="room1"
-            name="room1"
-            rows="2"
-            cols="80"
-            placeholder="textarea inside TextEditContainer..."
-            // value={this.state.text}
-            value={this.state.room1}
-            onChange={this.handleTextChange}
-            >
-          </textarea>
-        </div>
-
         <div>
-          Room 2:
-          <textarea
-            id="room2"
-            name="room2"
-            rows="2"
-            cols="80"
-            placeholder="textarea inside TextEditContainer..."
-            // value={this.state.text}
-            value={this.state.room2}
-            onChange={this.handleTextChange}
-            >
-          </textarea>
-        </div> */}
-
-
-
-
-        {/* {this.state.showRoom === "room1"
-        ?
-        <div>
-        Room 1:
-          <textarea
-            id="room1"
-            rows="10"
-            cols="80"
-            placeholder="textarea inside TextEditContainer..."
-            // value={this.state.room1}
-            value={this.state.text}
-            onChange={this.handleTextChange}
-            name="room1"
-            >
-          </textarea>
-        </div>
-        :
-        <div>
-          Room 2:
-          <textarea
-            id="room2"
-            rows="10"
-            cols="80"
-            placeholder="textarea inside TextEditContainer..."
-            // value={this.state.room2}
-            value={this.state.text}
-            onChange={this.handleTextChange}
-            name="room2"
-            >
-          </textarea>
-        </div>
-      } */}
-
-        {/* </form> */}
-
-
-
           <TextEdit
             // textFromContainer={this.state.text}
-            idFromContainer={this.state.showRoom}
-            // value={this.state.text}
-            valueFromContainer={this.state.text}
-            // valueFromContainer={this.state.room1}
-            handleTextChange={this.handleTextChange}
-            // nameFromContainer={this.state.showRoom}
+            // valueFromContainer={this.state.text}
+            // handleTextChange={this.handleTextChange}
+
+            showRoom={this.state.showRoom} //this is only prop that TextEdit needs!!!
+            // idFromContainer={'room3'} //this is only prop that TextEdit needs!!!
           />
+        </div>
 
+        <div>
+          {/* Room 2: */}
+          <TextEdit
+            showRoom={'room2'} //this is only prop that TextEdit needs!!!
+          />
+        </div>
+        <div>
+          {/* Room 3: */}
+          <TextEdit
+            showRoom={'room3'} //this is only prop that TextEdit needs!!!
+          />
+        </div>
 
+      </div>
+    );
+  }
+}
 
-          {/* <textarea
-            rows="5" cols="50"
-            value={this.state.text}
-            readOnly
-            >
-            </textarea> */}
-
-          </div>
-        );
-      }
-    }
-
-    export default TextEditContainer;
+export default TextEditContainer;
