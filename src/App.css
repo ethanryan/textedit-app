@@ -7,7 +7,7 @@ html {
 }
 
 .App-header {
-  padding-top: 5px;
+  padding-top: 2px;
   color: white;
 }
 
@@ -19,7 +19,7 @@ html {
   border: 1px dotted green;
   margin-left: 30%;
   margin-right: 30%;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 }
 
 .blueButton {
