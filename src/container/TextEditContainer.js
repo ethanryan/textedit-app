@@ -11,8 +11,8 @@ class TextEditContainer extends Component {
     this.state = {
       timestamp: '',
       text: '',
-      // choice: '',
-      showRoom: 'room1', //default
+      choice: '',
+      showRoom: 'room4', //default
       // showRoom: 'room4', //default
     };
     // this.handleTextChange = this.handleTextChange.bind(this)
@@ -33,13 +33,13 @@ class TextEditContainer extends Component {
   //   this.setState({ [event.target.name]: textValue });
   // }
 
-  // onChoiceClick = event => {
-  //   // console.log('button event.target.name: ', event.target.name)
-  //   const buttonValue = event.target.name
-  //   console.log('onChoiceClick - buttonValue: ', buttonValue)
-  //   this.setState({ choice: buttonValue });
-  //   // console.log('setState to choice: ', buttonValue)
-  // }
+  onChoiceClick = event => {
+    // console.log('button event.target.name: ', event.target.name)
+    const buttonValue = event.target.name
+    // console.log('onChoiceClick - buttonValue: ', buttonValue)
+    this.setState({ choice: buttonValue });
+    // console.log('setState to choice: ', buttonValue)
+  }
 
   onButtonClick = event => {
     // console.log('button event.target.name: ', event.target.name)
@@ -82,7 +82,11 @@ class TextEditContainer extends Component {
       border:'2px solid yellow',
     }
 
-    console.log('in TextEditContainer, this.state is: ', this.state)
+    // const displayNone = {
+    //   display:'none',
+    // }
+
+    console.log('TextEditContainer - render - this.state is: ', this.state)
     return (
       <div>
 
@@ -95,13 +99,13 @@ class TextEditContainer extends Component {
         /> */}
 
 
-        {/* <button id="a" name="a" onClick={this.onChoiceClick}   style={blueButton}>Choice A</button>
+        <button id="a" name="a" onClick={this.onChoiceClick}   style={blueButton}>Choice A</button>
         <button id="b" name="b" onClick={this.onChoiceClick}    style={redButton}>Choice B</button>
         <button id="c" name="c" onClick={this.onChoiceClick} style={yellowButton}>Choice C</button>
 
         <p>
           Choice: {this.state.choice ? this.state.choice : 'chosen one here'}
-        </p> */}
+        </p>
 
         <button id="showRoom1" name="room1" onClick={this.onButtonClick}   style={blueButton}>Show Room 1</button>
         <button id="showRoom2" name="room2" onClick={this.onButtonClick}    style={redButton}>Show Room 2</button>
