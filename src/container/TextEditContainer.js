@@ -12,8 +12,8 @@ class TextEditContainer extends Component {
       timestamp: '',
       text: '',
       choice: '',
-      // showRoom: 'room4', //default
-      showRoom: '', //default
+      showRoom: 'room4', //default
+      // showRoom: '', //default
       // showRoom: 'room4', //default
     };
     // this.handleTextChange = this.handleTextChange.bind(this)
@@ -56,7 +56,7 @@ class TextEditContainer extends Component {
   //   //then update state here, and will pass this as props to TextEdit, so it will update state of parent...
   // }
 
-  colorBorder(string) {
+  handleColorBorder(string) {
     var colorBorder
     if (string === 'room1') {
       colorBorder = {border:'2px solid blue',}
@@ -90,11 +90,12 @@ class TextEditContainer extends Component {
         /> */}
 
         <div className="choiceBox">
-          <p>Ensuring state updates don't affect Yjs.</p>
+          <p>
+            Ensuring state updates don't affect Yjs.
+          </p>
           <button id="a" name="a" onClick={this.onChoiceClick}   className='blueButton'>Choice A</button>
           <button id="b" name="b" onClick={this.onChoiceClick}    className='redButton'>Choice B</button>
           <button id="c" name="c" onClick={this.onChoiceClick} className='yellowButton'>Choice C</button>
-
           <p>
             Choice: {this.state.choice ? this.state.choice : 'chosen one here'}
           </p>
@@ -105,7 +106,7 @@ class TextEditContainer extends Component {
         <button id="showRoom3" name="room3" onClick={this.onButtonClick} className='yellowButton'>Show Room 3</button>
 
         <p>
-          Active Room: <span style={this.colorBorder(this.state.showRoom)}>
+          Active Room: <span style={this.handleColorBorder(this.state.showRoom)}>
             {this.state.showRoom ? this.state.showRoom : "room name goes here..."}
           </span>
         </p>
@@ -113,6 +114,7 @@ class TextEditContainer extends Component {
         <div>
           <TextEdit
             showRoom={this.state.showRoom} //this is only prop that TextEdit needs!!!
+            handleColorBorder={this.handleColorBorder}
             // handleRoomChange={this.handleRoomChange}
           />
         </div>

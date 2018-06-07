@@ -67,9 +67,11 @@ class Yjs extends Component {
         <h3>
           Yjs component
         </h3>
-
+        
         <p>
-          Yjs: {this.props.showRoom}
+          <span style={this.props.handleColorBorder(this.props.showRoom)}>
+            Yjs: {this.props.showRoom}
+          </span>
         </p>
 
       </div>

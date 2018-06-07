@@ -78,13 +78,16 @@ class TextEdit extends Component {
         </h3>
 
         <p>
-          {this.props.showRoom ? this.props.showRoom : "room name goes here..."}
+          <span style={this.props.handleColorBorder(this.props.showRoom)}>
+            {this.props.showRoom ? this.props.showRoom : "room name goes here..."}
+          </span>
         </p>
 
         <div>
 
           <Yjs
             showRoom={this.props.showRoom ? this.props.showRoom : "room name goes here..."}
+            handleColorBorder={this.props.handleColorBorder}
           />
 
           <textarea
@@ -97,11 +100,11 @@ class TextEdit extends Component {
             cols="80"
             placeholder="textarea inside TextEditContainer..."
             >
-          </textarea>
+            </textarea>
+
+          </div>
 
         </div>
-
-      </div>
       );
     }
   }
