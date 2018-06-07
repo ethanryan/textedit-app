@@ -3,26 +3,6 @@ import React, { Component } from 'react';
 import Yjs from '../components/Yjs.js';
 
 
-// const Y = require('yjs')
-//
-// // Yjs plugins
-// require('y-memory')(Y)
-// require('y-array')(Y)
-// require('y-text')(Y)
-// require('y-websockets-client')(Y) //i imagine i need to require this too...
-// //will also need a connector here... not y-ipfs-connector, but something with socket.io
-//
-// var io = Y['websockets-client'].io //need to get this.....
-//
-//
-// var link = 'http://localhost:1234'
-// // var link = 'https://textarea-yjs-websockets-server.herokuapp.com/'
-//
-// // create a connection
-// var connection = io(link) //need to include LINK within io()...
-
-
-
 class TextEdit extends Component {
 
   // componentWillReceiveProps(nextProps) {

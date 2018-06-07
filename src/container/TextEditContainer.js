@@ -121,15 +121,17 @@ class TextEditContainer extends Component {
 
         {/* <TextEdit
           showRoom={'room2'} //this is only prop that TextEdit needs!!!
+          handleColorBorder={this.handleColorBorder}
         />
 
         <TextEdit
-        showRoom={'room3'} //this is only prop that TextEdit needs!!!
-      /> */}
+          showRoom={'room3'} //this is only prop that TextEdit needs!!!
+          handleColorBorder={this.handleColorBorder}
+        /> */}
 
-    </div>
-  );
-}
+      </div>
+    );
+  }
 }
 
 export default TextEditContainer;
