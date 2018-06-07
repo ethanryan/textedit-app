@@ -19,49 +19,27 @@ var link = 'http://localhost:1234'
 var connection = io(link) //need to include LINK within io()...
 
 
-
-
-function getShowRoom(props) {
-  console.log('getShowRoom called with props: ', props)
-  var showRoom = props.showRoom
-  console.log('getShowRoom, showRoom is: ', showRoom)
-  return showRoom
-}
+// function getShowRoom(props) {
+//   console.log('getShowRoom called with props: ', props)
+//   var showRoom = props.showRoom
+//   console.log('getShowRoom, showRoom is: ', showRoom)
+//   return showRoom
+// }
 
 class Yjs extends Component {
 
-  // var currentRoomX = this.props.showRoom ? this.props.showRoom : "currentRoomX"
-  // console.log('currentRoomX is: ', this.currentRoomX)
-
-  // var xyz = this.props ? this.props.showRoom : "xyz here";
-  // currentRoom = getShowRoom(this.props)
-  // console.log('Yjs - xyz is: ', this.currentRoom)
-  // console.log('Yjs - xyz is: ', xyz)
-
   componentDidMount() {
     console.log('Yjs - componentDidMount - this.props is: ', this.props)
-    // var currentRoomX = this.props.showRoom
-    // console.log('Yjs - componentDidMount - currentRoomX is: ', this.currentRoomX)
   } //componentDidMount
-
-
 
   render() {
     // var currentRoom = getShowRoom(this.props)
-    var currentRoom = this.props.showRoom
 
     console.log('Yjs - render - this.props is: ', this.props)
-    console.log('Yjs - render - this.currentRoom is: ', this.currentRoom)
-    // console.log('Yjs - render - currentRoom is: ', this.currentRoom)
-    // console.log('in Yjs, this.props is: ', this.props)
-
 
     var that = this; //setting 'this' to 'that' so scope of 'this' doesn't get lost in promise below
 
-    // var currentRoom = this.props.showRoom;
-    // console.log('Yjs - currentRoom is: ', this.currentRoom)
-
-    let yThing = Y({
+    Y({
       db: {
         name: 'memory' // use the memory db adapter
       },
@@ -84,16 +62,15 @@ class Yjs extends Component {
     })
 
     return (
-      <div>
+      <div className="Yjs-style">
 
         <h3>
           Yjs component
         </h3>
-        <p>
-          Yjs: showRoom is --> {this.props.showRoom}
-        </p>
 
-        {this.yThing}
+        <p>
+          Yjs: {this.props.showRoom}
+        </p>
 
       </div>
     );

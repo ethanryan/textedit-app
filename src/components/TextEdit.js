@@ -53,18 +53,28 @@ class TextEdit extends Component {
   //   }
   // }
 
+  colorBorder(string) {
+    var colorBorder
+    if (string === 'room1') {
+      colorBorder = {border:'2px solid blue',}
+    }
+    if (string === 'room2') {
+      colorBorder = {border:'2px solid red',}
+    }
+    if (string === 'room3') {
+      colorBorder = {border:'2px solid yellow',}
+    }
+    return colorBorder
+  }
+
   render() {
     console.log('TextEdit - render - this.props is: ', this.props)
 
-    const fullWidth = {
-      width:'100%',
-    }
-
     return (
-      <div>
+      <div className='TextEdit-style'>
 
         <h3>
-          TextEdit component
+          TextEdit component - renders Yjs and textarea
         </h3>
 
         <p>
@@ -78,10 +88,12 @@ class TextEdit extends Component {
           />
 
           <textarea
+            className="fullWidth"
+            style={this.colorBorder(this.props.showRoom)}
             id={this.props.showRoom ? this.props.showRoom : "room name goes here..."}
             // name={this.props.showRoom ? this.props.showRoom : "room name goes here..."}
-            style={fullWidth}
-            rows="2"
+            // style={fullWidth}
+            rows="4"
             cols="80"
             placeholder="textarea inside TextEditContainer..."
             >

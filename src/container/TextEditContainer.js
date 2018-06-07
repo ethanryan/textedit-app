@@ -12,7 +12,8 @@ class TextEditContainer extends Component {
       timestamp: '',
       text: '',
       choice: '',
-      showRoom: 'room4', //default
+      // showRoom: 'room4', //default
+      showRoom: '', //default
       // showRoom: 'room4', //default
     };
     // this.handleTextChange = this.handleTextChange.bind(this)
@@ -72,23 +73,13 @@ class TextEditContainer extends Component {
 
   render() {
 
-    const blueButton = {
-      border:'2px solid blue',
-    }
-    const redButton = {
-      border:'2px solid red',
-    }
-    const yellowButton = {
-      border:'2px solid yellow',
-    }
-
     // const displayNone = {
     //   display:'none',
     // }
 
     console.log('TextEditContainer - render - this.state is: ', this.state)
     return (
-      <div>
+      <div className='TextEditContainer-style'>
 
         <h2>
           TextEditContainer
@@ -98,43 +89,45 @@ class TextEditContainer extends Component {
           timestamp={this.state.timestamp}
         /> */}
 
+        <div className="choiceBox">
+          <p>Ensuring state updates don't affect Yjs.</p>
+          <button id="a" name="a" onClick={this.onChoiceClick}   className='blueButton'>Choice A</button>
+          <button id="b" name="b" onClick={this.onChoiceClick}    className='redButton'>Choice B</button>
+          <button id="c" name="c" onClick={this.onChoiceClick} className='yellowButton'>Choice C</button>
 
-        <button id="a" name="a" onClick={this.onChoiceClick}   style={blueButton}>Choice A</button>
-        <button id="b" name="b" onClick={this.onChoiceClick}    style={redButton}>Choice B</button>
-        <button id="c" name="c" onClick={this.onChoiceClick} style={yellowButton}>Choice C</button>
+          <p>
+            Choice: {this.state.choice ? this.state.choice : 'chosen one here'}
+          </p>
+        </div>
 
-        <p>
-          Choice: {this.state.choice ? this.state.choice : 'chosen one here'}
-        </p>
-
-        <button id="showRoom1" name="room1" onClick={this.onButtonClick}   style={blueButton}>Show Room 1</button>
-        <button id="showRoom2" name="room2" onClick={this.onButtonClick}    style={redButton}>Show Room 2</button>
-        <button id="showRoom3" name="room3" onClick={this.onButtonClick} style={yellowButton}>Show Room 3</button>
+        <button id="showRoom1" name="room1" onClick={this.onButtonClick}   className='blueButton'>Show Room 1</button>
+        <button id="showRoom2" name="room2" onClick={this.onButtonClick}    className='redButton'>Show Room 2</button>
+        <button id="showRoom3" name="room3" onClick={this.onButtonClick} className='yellowButton'>Show Room 3</button>
 
         <p>
           Active Room: <span style={this.colorBorder(this.state.showRoom)}>
-            {this.state.showRoom}
+            {this.state.showRoom ? this.state.showRoom : "room name goes here..."}
           </span>
         </p>
 
-        <div style={this.colorBorder(this.state.showRoom)}>
+        <div>
           <TextEdit
             showRoom={this.state.showRoom} //this is only prop that TextEdit needs!!!
             // handleRoomChange={this.handleRoomChange}
           />
         </div>
 
-          <TextEdit
-            showRoom={'room2'} //this is only prop that TextEdit needs!!!
-          />
+        {/* <TextEdit
+          showRoom={'room2'} //this is only prop that TextEdit needs!!!
+        />
 
-          <TextEdit
-            showRoom={'room3'} //this is only prop that TextEdit needs!!!
-          />
+        <TextEdit
+        showRoom={'room3'} //this is only prop that TextEdit needs!!!
+      /> */}
 
-      </div>
-    );
-  }
+    </div>
+  );
+}
 }
 
 export default TextEditContainer;

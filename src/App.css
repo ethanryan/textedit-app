@@ -1,13 +1,55 @@
+html {
+  background: lightblue;
+}
+
 .App {
   text-align: center;
 }
 
 .App-header {
-  background-color: lightblue;
-  padding: 15px;
+  padding-top: 5px;
   color: white;
 }
 
 #textareaEdit {
   width: 100%;
+}
+
+.choiceBox {
+  border: 1px dotted green;
+  margin-left: 30%;
+  margin-right: 30%;
+  margin-bottom: 15px;
+}
+
+.blueButton {
+  border: 2px solid blue;
+}
+
+.redButton {
+  border: 2px solid red;
+}
+
+.yellowButton {
+  border: 2px solid yellow;
+}
+
+.fullWidth {
+  width: 100%;
+}
+
+.TextEditContainer-style {
+  padding-top: 1px;
+  background: whitesmoke;
+}
+
+.TextEdit-style {
+  padding-top: 5px;
+  background: gainsboro;
+}
+
+.Yjs-style {
+  padding-top: 2px;
+  padding-bottom: 2px;
+  background: lightgray;
 }
