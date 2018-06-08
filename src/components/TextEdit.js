@@ -33,20 +33,6 @@ class TextEdit extends Component {
   //   }
   // }
 
-  colorBorder(string) {
-    var colorBorder
-    if (string === 'room1') {
-      colorBorder = {border:'2px solid blue',}
-    }
-    if (string === 'room2') {
-      colorBorder = {border:'2px solid red',}
-    }
-    if (string === 'room3') {
-      colorBorder = {border:'2px solid yellow',}
-    }
-    return colorBorder
-  }
-
   render() {
     console.log('TextEdit - render - this.props is: ', this.props)
 
@@ -56,6 +42,9 @@ class TextEdit extends Component {
         <h3>
           TextEdit component - renders Yjs and textarea
         </h3>
+        <p>
+          (if Yjs renders TextArea, it creates an infinite loop)
+        </p>
 
         <p>
           <span style={this.props.handleColorBorder(this.props.showRoom)}>
@@ -72,7 +61,7 @@ class TextEdit extends Component {
 
           <textarea
             className="fullWidth"
-            style={this.colorBorder(this.props.showRoom)}
+            style={this.props.handleColorBorder(this.props.showRoom)}
             id={this.props.showRoom ? this.props.showRoom : "room name goes here..."}
             // name={this.props.showRoom ? this.props.showRoom : "room name goes here..."}
             // style={fullWidth}
