@@ -10,16 +10,17 @@ class TextEditContainer extends Component {
     super()
     this.state = {
       timestamp: '',
-      hideTextArea: false,
+      connectionExists: false,
       choice: '',
-      showRoom: 'room4', //default
-      // showRoom: '', //default
+      // showRoom: 'room4', //default
+      showRoom: '', //default
       // showRoom: 'room4', //default
     };
     // this.handleTextChange = this.handleTextChange.bind(this)
     // this.onChoiceClick = this.onChoiceClick.bind(this)
     this.onButtonClick = this.onButtonClick.bind(this)
-    this.handleHideTextArea = this.handleHideTextArea.bind(this)
+    this.setConnectionExistsToTrue = this.setConnectionExistsToTrue.bind(this)
+    this.setConnectionExistsToFalse = this.setConnectionExistsToFalse.bind(this)
   } //end constructor
 
   // componentDidMount() {
@@ -45,9 +46,15 @@ class TextEditContainer extends Component {
   onButtonClick = event => {
     // console.log('button event.target.name: ', event.target.name)
     const buttonValue = event.target.name
-    console.log('buttonValue: ', buttonValue)
-    this.setState({ showRoom: buttonValue });
-    // console.log('setState to showRoom: ', buttonValue)
+    console.log('0. onButtonClick - buttonValue: ', buttonValue)
+    console.log('1. onButtonClick - setConnectionExistsToFalse...')
+    this.setConnectionExistsToFalse()
+    console.log('2. onButtonClick - ...then setState to new showRoom...')
+    this.setState({
+      showRoom: buttonValue,
+    });
+    console.log('3. onButtonClick - ...and connectionExists to true')
+    // this.setConnectionExistsToTrue()
   }
 
   handleColorBorder(string) {
@@ -70,9 +77,16 @@ class TextEditContainer extends Component {
     return className
   }
 
-  handleHideTextArea() {
-    console.log('calling handleHideTextArea...')
-    this.setState({ hideTextArea: true });
+  setConnectionExistsToTrue() {
+    console.log('calling setConnectionExistsToTrue...')
+    this.setState({ connectionExists: true });
+    console.log('TextEditContainer - STATE NOW - this.state is: ', this.state)
+  }
+
+  setConnectionExistsToFalse() {
+    console.log('calling setConnectionExistsToFalse...')
+    this.setState({ connectionExists: false });
+    console.log('TextEditContainer - STATE NOW - this.state is: ', this.state)
   }
 
 
@@ -112,14 +126,16 @@ class TextEditContainer extends Component {
           </span>
         </p>
 
+        <button onClick={this.setConnectionExistsToTrue}   className='blueButton'>Connection Exists</button>
+
         {/* <div style={this.state.choice ? null : this.handleDisplayNone()}> */}
         <div>
           <TextEdit
             showRoom={this.state.showRoom} //this is only prop that TextEdit needs!!!
-            hideTextArea={this.state.hideTextArea}
+            connectionExists={this.state.connectionExists}
             handleColorBorder={this.handleColorBorder}
             handleDisplayNone={this.handleDisplayNone}
-            handleHideTextArea={this.handleHideTextArea}
+            setConnectionExistsToTrue={this.setConnectionExistsToTrue}
           />
         </div>
 

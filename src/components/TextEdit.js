@@ -56,10 +56,14 @@ class TextEdit extends Component {
           <Yjs
             showRoom={this.props.showRoom ? this.props.showRoom : "room name goes here..."}
             handleColorBorder={this.props.handleColorBorder}
-            handleHideTextArea={this.props.handleHideTextArea}
+            connectionExists={this.props.connectionExists}
+            setConnectionExistsToTrue={this.props.setConnectionExistsToTrue}
           />
 
-          <div style={this.props.hideTextArea === true ? this.props.handleDisplayNone() : null}>
+          {/* <div style={this.props.connectionExists === true ? this.props.handleDisplayNone() : null}> */}
+
+          {this.props.connectionExists === true ?
+          <div>
             <textarea
               className="fullWidth"
               style={this.props.handleColorBorder(this.props.showRoom)}
@@ -72,6 +76,12 @@ class TextEdit extends Component {
               >
               </textarea>
           </div>
+          :
+          <h4>
+            No connection.
+          </h4>
+        }
+
 
         </div>
       );
