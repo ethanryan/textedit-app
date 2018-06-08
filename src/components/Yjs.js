@@ -34,6 +34,7 @@ class Yjs extends Component {
     console.log('calling destroyUser...')
     connection.destroy() //this works! server log shows 'user left', and updates to text don't sync on reconnect... (calling disconnect() instead of destroy() made updates still sync.)
     console.log('USER LEFT, connection DESTROYED.')
+    this.props.handleHideTextArea() //calling destroyUser disconnectes user AND hides the textarea
     console.log('after destroyUser - connection is: ', connection) // this is good info, should have looked at this before in console...
   }
 

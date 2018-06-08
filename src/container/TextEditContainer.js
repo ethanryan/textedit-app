@@ -10,7 +10,7 @@ class TextEditContainer extends Component {
     super()
     this.state = {
       timestamp: '',
-      text: '',
+      hideTextArea: false,
       choice: '',
       showRoom: 'room4', //default
       // showRoom: '', //default
@@ -19,7 +19,7 @@ class TextEditContainer extends Component {
     // this.handleTextChange = this.handleTextChange.bind(this)
     // this.onChoiceClick = this.onChoiceClick.bind(this)
     this.onButtonClick = this.onButtonClick.bind(this)
-    // this.handleRoomChange = this.handleRoomChange.bind(this)
+    this.handleHideTextArea = this.handleHideTextArea.bind(this)
   } //end constructor
 
   // componentDidMount() {
@@ -50,12 +50,6 @@ class TextEditContainer extends Component {
     // console.log('setState to showRoom: ', buttonValue)
   }
 
-  // handleRoomChange(newRoom) {
-  //   console.log('***--> handleRoomChange, newRoom is: ', newRoom)
-  //   this.setState({ showRoom: newRoom });
-  //   //then update state here, and will pass this as props to TextEdit, so it will update state of parent...
-  // }
-
   handleColorBorder(string) {
     var colorBorder
     if (string === 'room1') {
@@ -68,6 +62,17 @@ class TextEditContainer extends Component {
       colorBorder = {border:'2px solid yellow',}
     }
     return colorBorder
+  }
+
+//testing conditionally revealing textarea, but it doesn't effect user joining room...
+  handleDisplayNone() {
+    var className={display: 'none',}
+    return className
+  }
+
+  handleHideTextArea() {
+    console.log('calling handleHideTextArea...')
+    this.setState({ hideTextArea: true });
   }
 
 
@@ -107,11 +112,14 @@ class TextEditContainer extends Component {
           </span>
         </p>
 
+        {/* <div style={this.state.choice ? null : this.handleDisplayNone()}> */}
         <div>
           <TextEdit
             showRoom={this.state.showRoom} //this is only prop that TextEdit needs!!!
+            hideTextArea={this.state.hideTextArea}
             handleColorBorder={this.handleColorBorder}
-            // handleRoomChange={this.handleRoomChange}
+            handleDisplayNone={this.handleDisplayNone}
+            handleHideTextArea={this.handleHideTextArea}
           />
         </div>
 

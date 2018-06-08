@@ -52,25 +52,25 @@ class TextEdit extends Component {
           </span>
         </p>
 
-        <div>
 
           <Yjs
             showRoom={this.props.showRoom ? this.props.showRoom : "room name goes here..."}
             handleColorBorder={this.props.handleColorBorder}
+            handleHideTextArea={this.props.handleHideTextArea}
           />
 
-          <textarea
-            className="fullWidth"
-            style={this.props.handleColorBorder(this.props.showRoom)}
-            id={this.props.showRoom ? this.props.showRoom : "room name goes here..."}
-            // name={this.props.showRoom ? this.props.showRoom : "room name goes here..."}
-            // style={fullWidth}
-            rows="4"
-            cols="80"
-            placeholder="textarea inside TextEditContainer..."
-            >
-            </textarea>
-
+          <div style={this.props.hideTextArea === true ? this.props.handleDisplayNone() : null}>
+            <textarea
+              className="fullWidth"
+              style={this.props.handleColorBorder(this.props.showRoom)}
+              id={this.props.showRoom ? this.props.showRoom : "room name goes here..."}
+              // name={this.props.showRoom ? this.props.showRoom : "room name goes here..."}
+              // style={fullWidth}
+              rows="4"
+              cols="80"
+              placeholder="textarea inside TextEditContainer..."
+              >
+              </textarea>
           </div>
 
         </div>
