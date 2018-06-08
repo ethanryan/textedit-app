@@ -38,6 +38,10 @@ html {
   width: 100%;
 }
 
+.displayNone {
+  display: none;
+}
+
 .TextEditContainer-style {
   padding-top: 1px;
   background: whitesmoke;

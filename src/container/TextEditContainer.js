@@ -73,10 +73,6 @@ class TextEditContainer extends Component {
 
   render() {
 
-    // const displayNone = {
-    //   display:'none',
-    // }
-
     console.log('TextEditContainer - render - this.state is: ', this.state)
     return (
       <div className='TextEditContainer-style'>
