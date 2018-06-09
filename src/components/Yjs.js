@@ -19,14 +19,6 @@ var connection  //just setting variable for now...
 // var connection = io(link) //need to include LINK within io()...
 
 
-// function getShowRoom(props) {
-//   console.log('getShowRoom called with props: ', props)
-//   var showRoom = props.showRoom
-//   console.log('getShowRoom, showRoom is: ', showRoom)
-//   return showRoom
-// }
-
-
 
 class Yjs extends Component {
 
@@ -64,18 +56,8 @@ class Yjs extends Component {
   reconnectUser() {
     console.log('in reconnectUser - connection is: ', connection) // this is good info, should have looked at this before in console...
     console.log('in reconnectUser - io is:::::::::::: ', io) // this is good info, should have looked at this before in console...
-    // console.table(connection) // this is good info, should have looked at this before in console...
-    // console.log('typeof connection is: ', typeof connection ) // this is good info, should have looked at this before in console...
-    // console.log('Object.getOwnPropertyNames(connection) is: ', Object.getOwnPropertyNames(connection) ) // this is good info, should have looked at this before in console...
-    // console.log('Object.getOwnPropertyNames(connection._callbacks) is: ', Object.getOwnPropertyNames(connection._callbacks) ) // this is good info, should have looked at this before in console...
-    // console.log('Object.getOwnPropertyNames(connection._callbacks.connect) is: ', Object.getOwnPropertyNames(connection._callbacks.connect) ) // this is good info, should have looked at this before in console...
-    // console.log('Object.getOwnPropertyNames(connection._callbacks.connect[1]) is: ', Object.getOwnPropertyNames(connection._callbacks.connect[1]) ) // this is good info, should have looked at this before in console...
-    // console.log('Object.getOwnPropertyNames(connection._callbacks.connect[1].name) is: ', Object.getOwnPropertyNames(connection._callbacks.connect[1].name) ) // this is good info, should have looked at this before in console...
-    // console.log('Object.getOwnPropertyNames(connection._callbacks.connect[1].prototype) is: ', Object.getOwnPropertyNames(connection._callbacks.connect[1].prototype) ) // this is good info, should have looked at this before in console...
-
     console.log('calling reconnectUser...')
     // connection.connect() //doesn't say not a function, but nothing happens with this....
-
     this.createConnection()
   }
 
@@ -98,17 +80,10 @@ class Yjs extends Component {
   }
 
 
-  // componentDidMount() {
-  //   console.log('Yjs - componentDidMount - this.props is: ', this.props)
-  // } //componentDidMount
-
   render() {
 
 
-        // connection = this.createConnection()
-        console.log('>>>>>>>> connection in here is: ', connection)
-
-    // var currentRoom = getShowRoom(this.props)
+    console.log('>>>>>>>> connection in here is: ', connection)
 
     //console.logging connection details here won't show until state is updated...
     //note: above logs work after i update state.... -- moved to within promise!
@@ -150,55 +125,16 @@ class Yjs extends Component {
       }
 
 
-      // setTimeout(function(){
-      //   console.log('***** 0. helllllooooo after two seconds...')
-      //   console.log('calling y.destroy...')
-      //   y.destroy()
-      //   console.log('CALLED y.destroy....')
-      // }, 2000);
-
-
-
-      // console.log('calling y.destroy...')
-      // y.destroy()
-      // console.log('CALLED y.destroy....')
-
-      // console.log('calling y.connector.userJoined...')
-      // y.connector.userJoined() //Unhandled Rejection (Error): You must specify the role of the joined user!
-      // y.connector.userJoined(y.connector.userId, 'slave') //Unhandled Rejection (Error): You must specify the role of the joined user!
-
       console.log('calling y.reconnect...')
       console.log('YO----->>>>> y.options.connector.room: ', y.options.connector.room)
 
       // setTimeout(function(){console.log('***** 1. helllllooooo after two seconds...')}, 2000);
 
-      // y.connector.connect()
-      // y.connector._onConnect()
-
-      // setTimeout(function(){
-      //   console.log('***** 2. helllllooooo after three seconds...')
-      //   y.connector._onConnect('joinRoom', y.options.connector.room)
-      //   console.log('called y.connector._onConnect() ...')
-      // }, 3000);
-
-      // y.connector._onConnect('joinRoom', y.options.connector.room)
-      // console.log('called y.connector._onConnect() ...')
-
-
-
-      // y.joinRoom() //Unhandled Rejection (Error): You must specify the role of the joined user!
-
-      // console.log('yjs - in promise - connection is: ', connection) // this is good info, should have looked at this before in console...
-
-      // console.log('calling y.destroy...')
-      // y.destroy()
-      // console.log('CALLED y.destroy....')
-
       //maybe add an if conditional here, for disabling IF ... something or other...
       //so user is in only one room at a time...
     })
 
-
+    
     return (
       <div className="Yjs-style">
 

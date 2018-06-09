@@ -14,26 +14,13 @@ class TextEditContainer extends Component {
       choice: '',
       // showRoom: 'room4', //default
       showRoom: '', //default
-      // showRoom: 'room4', //default
     };
-    // this.handleTextChange = this.handleTextChange.bind(this)
-    // this.onChoiceClick = this.onChoiceClick.bind(this)
+    this.onChoiceClick = this.onChoiceClick.bind(this)
     this.onButtonClick = this.onButtonClick.bind(this)
     this.setConnectionExistsToTrue = this.setConnectionExistsToTrue.bind(this)
     this.setConnectionExistsToFalse = this.setConnectionExistsToFalse.bind(this)
   } //end constructor
 
-  // componentDidMount() {
-  //   // console.log('after componentDidMount - in TextEditContainer, this.state is: ', this.state)
-  // } //componentDidMount
-
-  // handleTextChange = event => {
-  //   console.log('text event.target.name: ', event.target.name); // the name of the element (ex: 'room1')
-  //   // console.log('Text event.target.value', event.target.value); // the value of the element
-  //   // this.setState({text: event.target.value});
-  //   const textValue = event.target.value
-  //   this.setState({ [event.target.name]: textValue });
-  // }
 
   onChoiceClick = event => {
     // console.log('button event.target.name: ', event.target.name)
@@ -128,7 +115,6 @@ class TextEditContainer extends Component {
 
         <button onClick={this.setConnectionExistsToTrue}   className='blueButton'>Connection Exists</button>
 
-        {/* <div style={this.state.choice ? null : this.handleDisplayNone()}> */}
         <div>
           <TextEdit
             showRoom={this.state.showRoom} //this is only prop that TextEdit needs!!!
