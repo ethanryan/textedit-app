@@ -9,7 +9,6 @@ class TextEditContainer extends Component {
   constructor() {
     super()
     this.state = {
-      timestamp: '',
       connectionExists: false,
       choice: '',
       // showRoom: 'room4', //default
@@ -23,25 +22,22 @@ class TextEditContainer extends Component {
 
 
   onChoiceClick = event => {
-    // console.log('button event.target.name: ', event.target.name)
     const buttonValue = event.target.name
-    // console.log('onChoiceClick - buttonValue: ', buttonValue)
     this.setState({ choice: buttonValue });
-    // console.log('setState to choice: ', buttonValue)
   }
 
   onButtonClick = event => {
-    // console.log('button event.target.name: ', event.target.name)
     const buttonValue = event.target.name
     console.log('0. onButtonClick - buttonValue: ', buttonValue)
     console.log('1. onButtonClick - setConnectionExistsToFalse...')
-    this.setConnectionExistsToFalse()
+    this.setConnectionExistsToFalse() //first setConnectionExistsToFalse, to stop disconnect Yjs...
     console.log('2. onButtonClick - ...then setState to new showRoom...')
     this.setState({
       showRoom: buttonValue,
-    });
+    }, () => {
+      this.setConnectionExistsToTrue()
+    }) //next set state to show the room user clicked, and then setConnectionExistsToTrue, to render Yjs
     console.log('3. onButtonClick - ...and connectionExists to true')
-    // this.setConnectionExistsToTrue()
   }
 
   handleColorBorder(string) {
@@ -58,22 +54,16 @@ class TextEditContainer extends Component {
     return colorBorder
   }
 
-//testing conditionally revealing textarea, but it doesn't effect user joining room...
-  handleDisplayNone() {
-    var className={display: 'none',}
-    return className
-  }
-
   setConnectionExistsToTrue() {
     console.log('calling setConnectionExistsToTrue...')
     this.setState({ connectionExists: true });
-    console.log('TextEditContainer - STATE NOW - this.state is: ', this.state)
+    // console.log('TextEditContainer - STATE NOW - this.state is: ', this.state)
   }
 
   setConnectionExistsToFalse() {
     console.log('calling setConnectionExistsToFalse...')
     this.setState({ connectionExists: false });
-    console.log('TextEditContainer - STATE NOW - this.state is: ', this.state)
+    // console.log('TextEditContainer - STATE NOW - this.state is: ', this.state)
   }
 
 
@@ -87,13 +77,9 @@ class TextEditContainer extends Component {
           TextEditContainer
         </h2>
 
-        {/* <Clock
-          timestamp={this.state.timestamp}
-        /> */}
-
         <div className="choiceBox">
           <p>
-            Ensuring state updates don't affect Yjs.
+            Other state updates don't affect Yjs.
           </p>
           <button id="a" name="a" onClick={this.onChoiceClick}   className='blueButton'>Choice A</button>
           <button id="b" name="b" onClick={this.onChoiceClick}    className='redButton'>Choice B</button>
@@ -113,27 +99,16 @@ class TextEditContainer extends Component {
           </span>
         </p>
 
-        <button onClick={this.setConnectionExistsToTrue}   className='blueButton'>Connection Exists</button>
+        {/* <button onClick={this.setConnectionExistsToTrue}   className='blueButton'>Connection Exists</button> */}
 
         <div>
           <TextEdit
             showRoom={this.state.showRoom} //this is only prop that TextEdit needs!!!
             connectionExists={this.state.connectionExists}
             handleColorBorder={this.handleColorBorder}
-            handleDisplayNone={this.handleDisplayNone}
             setConnectionExistsToTrue={this.setConnectionExistsToTrue}
           />
         </div>
-
-        {/* <TextEdit
-          showRoom={'room2'} //this is only prop that TextEdit needs!!!
-          handleColorBorder={this.handleColorBorder}
-        />
-
-        <TextEdit
-          showRoom={'room3'} //this is only prop that TextEdit needs!!!
-          handleColorBorder={this.handleColorBorder}
-        /> */}
 
       </div>
     );
