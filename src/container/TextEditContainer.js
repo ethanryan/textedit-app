@@ -9,10 +9,11 @@ class TextEditContainer extends Component {
   constructor() {
     super()
     this.state = {
-      connectionExists: false,
+      // connectionExists: false,
+      connectionExists: true,
       choice: '',
-      // showRoom: 'room4', //default
-      showRoom: '', //default
+      showRoom: 'room1', //default
+      // showRoom: '', //default
     };
     this.onChoiceClick = this.onChoiceClick.bind(this)
     this.onButtonClick = this.onButtonClick.bind(this)
@@ -29,15 +30,18 @@ class TextEditContainer extends Component {
   onButtonClick = event => {
     const buttonValue = event.target.name
     console.log('0. onButtonClick - buttonValue: ', buttonValue)
-    console.log('1. onButtonClick - setConnectionExistsToFalse...')
-    this.setConnectionExistsToFalse() //first setConnectionExistsToFalse, to stop disconnect Yjs...
+    // console.log('1. onButtonClick - setConnectionExistsToFalse...')
+    // this.setConnectionExistsToFalse() //first setConnectionExistsToFalse, to stop disconnect Yjs...
     console.log('2. onButtonClick - ...then setState to new showRoom...')
     this.setState({
       showRoom: buttonValue,
-    }, () => {
-      this.setConnectionExistsToTrue()
-    }) //next set state to show the room user clicked, and then setConnectionExistsToTrue, to render Yjs
-    console.log('3. onButtonClick - ...and connectionExists to true')
+    })
+    // this.setState({
+    //   showRoom: buttonValue,
+    // }, () => {
+    //   this.setConnectionExistsToTrue()
+    // }) //next set state to show the room user clicked, and then setConnectionExistsToTrue, to render Yjs
+    // console.log('3. onButtonClick - ...and connectionExists to true')
   }
 
   handleColorBorder(string) {
@@ -77,7 +81,7 @@ class TextEditContainer extends Component {
           TextEditContainer
         </h2>
 
-        <div className="choiceBox">
+        {/* <div className="choiceBox">
           <p>
             Other state updates don't affect Yjs.
           </p>
@@ -87,7 +91,7 @@ class TextEditContainer extends Component {
           <p>
             Choice: {this.state.choice ? this.state.choice : 'chosen one here'}
           </p>
-        </div>
+        </div> */}
 
         <button id="showRoom1" name="room1" onClick={this.onButtonClick}   className='blueButton'>Show Room 1</button>
         <button id="showRoom2" name="room2" onClick={this.onButtonClick}    className='redButton'>Show Room 2</button>
@@ -99,14 +103,37 @@ class TextEditContainer extends Component {
           </span>
         </p>
 
-        {/* <button onClick={this.setConnectionExistsToTrue}   className='blueButton'>Connection Exists</button> */}
+        {/* <button onClick={this.setConnectionExistsToTrue} className='blueButton'>Connection Exists</button> */}
 
-        <div>
+        {/* <div>
           <TextEdit
             showRoom={this.state.showRoom} //this is only prop that TextEdit needs!!!
             connectionExists={this.state.connectionExists}
             handleColorBorder={this.handleColorBorder}
-            setConnectionExistsToTrue={this.setConnectionExistsToTrue}
+          />
+        </div> */}
+
+        <div>
+          <TextEdit
+            showRoom={'room1'} //this is only prop that TextEdit needs!!!
+            connectionExists={this.state.connectionExists}
+            handleColorBorder={this.handleColorBorder}
+          />
+        </div>
+
+        <div>
+          <TextEdit
+            showRoom={'room2'} //this is only prop that TextEdit needs!!!
+            connectionExists={this.state.connectionExists}
+            handleColorBorder={this.handleColorBorder}
+          />
+        </div>
+
+        <div>
+          <TextEdit
+            showRoom={'room3'} //this is only prop that TextEdit needs!!!
+            connectionExists={this.state.connectionExists}
+            handleColorBorder={this.handleColorBorder}
           />
         </div>
 

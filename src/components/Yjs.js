@@ -12,10 +12,9 @@ var io = Y['websockets-client'].io //need to get this.....
 
 
 var link = 'http://localhost:1234'
-// var link = 'https://textarea-yjs-websockets-server.herokuapp.com/'
+// var link = heroku server link will go here, when i host 'textedit-app-yjs-websockets-server' on heroku
 
 // create a connection
-// var connection  //just setting variable for now...
 var connection = io(link) //need to include LINK within io()...
 
 
@@ -27,39 +26,16 @@ class Yjs extends Component {
     console.log('Yjs - componentDidMount - this.props.showRoom is: ', this.props.showRoom)
   }
 
-  // createConnection() {
-  //   //if this.props.showRoom isn't empty string, return connection...
-  //   if (this.props.connectionExists === true) {
-  //     connection = io(link) //need to include LINK within io()...
-  //   } else {
-  //     connection = null
+  // componentDidUpdate(prevProps, prevState, snapshot)
+  // componentDidUpdate(prevProps, prevState, snapshot) {
+  //   console.log('Yjs - componentDidUpdate - this.props is: ', this.props)
+  //   console.log('Yjs - componentDidUpdate - prevProps is: ', prevProps)
+  //   if (this.props !== prevProps) {
+  //     console.log('oh no --->>> this.props !== prevProps in Yjs...')
   //   }
-  //   console.log('in createConnection, connection is: ', connection)
-  //   return connection
   // }
 
-  // destroyUser() {
-  //   console.log('calling destroyUser...')
-  //   connection.destroy() //this works! server log shows 'user left', and updates to text don't sync on reconnect... (calling disconnect() instead of destroy() made updates still sync.)
-  //   console.log('USER LEFT, connection DESTROYED.')
-  //   // this.props.setConnectionExistsToTrue() //calling destroyUser disconnectes user AND hides the textarea
-  //   console.log('after destroyUser - connection is: ', connection) // this is good info, should have looked at this before in console...
-  // }
-  //
-  // disconnectUser() {
-  //   console.log('calling disconnectuser...')
-  //   connection.disconnect()
-  //   console.log('CONNECTION DESTROYED') //works, but updating state in anyway makes user rejoin... (including hiding textarea...)
-  //   // this.props.setConnectionExistsToTrue() //calling disconnectUser disconnects user AND hides the textarea
-  // }
 
-  // reconnectUser() {
-  //   console.log('in reconnectUser - connection is: ', connection) // this is good info, should have looked at this before in console...
-  //   console.log('in reconnectUser - io is:::::::::::: ', io) // this is good info, should have looked at this before in console...
-  //   console.log('calling reconnectUser...')
-  //   // connection.connect() //doesn't say not a function, but nothing happens with this....
-  //   this.createConnection()
-  // }
 
   // destroyUserClicked = event => {
   //   const buttonValue = event.target.name
@@ -82,14 +58,28 @@ class Yjs extends Component {
 
   render() {
 
-    console.log('>>>>>>>> connection in here is: ', connection)
-
     //console.logging connection details here won't show until state is updated...
     //note: above logs work after i update state.... -- moved to within promise!
 
     console.log('Yjs - render - this.props is: ', this.props)
 
     var that = this; //setting 'this' to 'that' so scope of 'this' doesn't get lost in promise below
+
+    console.log('Yjs -->>> connection in render is: ', connection)
+    console.log('Yjs -->>> connection.connected in render is: ', connection.connected)
+    console.log('Yjs -->>> connection.id in render is: ', connection.id)
+
+    var connectionId = connection.id
+    console.log('connectionId is: ', connectionId)
+
+
+    if (this.props.connectionExists === false) {
+      console.log('Yjs --->> this.props.connectionExists === false')
+        // connection.destroy() //this works! server log shows 'user left', and updates to text don't sync on reconnect... (calling disconnect() instead of destroy() made updates still sync.)
+        connection.disconnect()
+        console.log('connection disconnected...')
+        console.log('USER LEFT, connection DESTROYED.')
+    } //end if statement
 
     //putting Y within a ternary operator, so it only gets rendered if connectionExists...
     if (this.props.connectionExists === true) {
@@ -115,12 +105,14 @@ class Yjs extends Component {
         console.log('HELLO from y promise!!!')
         console.log('y is: ', y)
         console.log('y.connector.userId is: ', y.connector.userId)
+        console.log('y.connector.connections is: ', y.connector.connections)
 
-        // console.log('y - if connectionExists is false, destroy connection...')
-        // if (that.props.connectionExists === false) {
-        //   y.destroy()
-        //   console.log('called y.DESTROY')
-        // }
+        //don't need below if statement with if (this.props.connectionExists === false) above...
+        if (that.props.connectionExists === false) {
+          console.log('y - if connectionExists is false, destroy connection...')
+          y.destroy()
+          console.log('called y.DESTROY')
+        }
 
       })
     } //end if statement
@@ -129,9 +121,9 @@ class Yjs extends Component {
     return (
       <div className="Yjs-style">
 
-        <h3>
-          Yjs component
-        </h3>
+        {/* <h3>
+          Yjs component - connectionExists: {this.props.connectionExists ? "true" : "false"}
+        </h3> */}
 
         <p>
           <span style={this.props.handleColorBorder(this.props.showRoom)}>

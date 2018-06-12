@@ -11,16 +11,17 @@ class TextEdit extends Component {
     return (
       <div className='TextEdit-style'>
 
-        <h3>
+        {/* <h3>
           TextEdit component - renders Yjs and textarea
         </h3>
+
         <p>
           (if Yjs renders TextArea, it creates an infinite loop)
-        </p>
+        </p> */}
 
         <p>
           <span style={this.props.handleColorBorder(this.props.showRoom)}>
-            {this.props.showRoom ? this.props.showRoom : "room name goes here..."}
+            TextEdit: {this.props.showRoom ? this.props.showRoom : "room name goes here..."}
           </span>
         </p>
 
@@ -29,7 +30,6 @@ class TextEdit extends Component {
           showRoom={this.props.showRoom ? this.props.showRoom : "room name goes here..."}
           handleColorBorder={this.props.handleColorBorder}
           connectionExists={this.props.connectionExists}
-          setConnectionExistsToTrue={this.props.setConnectionExistsToTrue}
         />
 
         {this.props.connectionExists === true ?
@@ -46,7 +46,7 @@ class TextEdit extends Component {
           </div>
           :
           <h4>
-            No connection.
+            Textarea here when connection exists.
           </h4>
           }
 
