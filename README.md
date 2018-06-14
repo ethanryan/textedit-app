@@ -1,5 +1,7 @@
 Collaborative text editing app, built with React, Express, and Yjs.
 
+Visit app online: https://textedit-app.herokuapp.com/
+
 To run locally:
 
 clone this repo
