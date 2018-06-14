@@ -1,89 +1,145 @@
 import React, { Component } from 'react';
 
-import io from "socket.io-client"; //this and below via: https://blog.cloudboost.io/creating-a-chat-web-app-using-express-js-react-js-socket-io-1b01100a8ea5
-
-import Clock from '../components/Clock.js';
+// import Clock from '../components/Clock.js';
 import TextEdit from '../components/TextEdit.js';
 
 
-const socket = io('localhost:8080'); //initiate the request to open a socket connection with our Express server, in server.js
 
 class TextEditContainer extends Component {
   constructor() {
     super()
     this.state = {
-      timestamp: 'no timestamp yet',
-      text: '',
+      // connectionExists: false,
+      connectionExists: true,
+      choice: '',
+      showRoom: 'room1', //default
+      // showRoom: '', //default
     };
-    // this.socket = io('localhost:8080'); //better here, or above as a const?
+    this.onChoiceClick = this.onChoiceClick.bind(this)
+    this.onButtonClick = this.onButtonClick.bind(this)
+    this.setConnectionExistsToTrue = this.setConnectionExistsToTrue.bind(this)
+    this.setConnectionExistsToFalse = this.setConnectionExistsToFalse.bind(this)
   } //end constructor
 
-  componentDidMount() {
-    socket.on('time', timeString => {
-      // console.log('timeString is::::', timeString)
-      this.setState({timestamp: timeString})
-    });
-  } //componentDidMount
 
-  handleTextChange = event => {
-    event.preventDefault(); //need preventDefault???
-    socket.emit('TEXTAREA_UPDATE', event.target.value); //below 'TEXTAREA_UPDATE' must match what is emitted here, i.e.: 'TEXTAREA_UPDATE' (emit sends the TEXTAREA_UPDATE to everyone, including the sender)
-    // this.setState({text: event.target.value});
-    socket.on('TEXTAREA_UPDATE', textAreaEdit => {
-      this.setState({text: textAreaEdit}) //whenever a 'TEXTAREA_UPDATE' is emitted, the entire textarea (this.state.text) will be updated with the entire textAreaEdit received
-    });
+  onChoiceClick = event => {
+    const buttonValue = event.target.name
+    this.setState({ choice: buttonValue });
   }
 
-  componentDidUpdate() { //does it help to have below in componentDidUpdate???
-    // this.handleTextChange = event => {
-    //   event.preventDefault(); //need preventDefault???
-    //   socket.emit('TEXTAREA_UPDATE', event.target.value); //below 'TEXTAREA_UPDATE' must match what is emitted here, i.e.: 'TEXTAREA_UPDATE' (emit sends the TEXTAREA_UPDATE to everyone, including the sender)
-    //   // this.setState({text: event.target.value});
-    //   socket.on('TEXTAREA_UPDATE', textAreaEdit => {
-    //     this.setState({text: textAreaEdit}) //whenever a 'TEXTAREA_UPDATE' is emitted, the entire textarea (this.state.text) will be updated with the entire textAreaEdit received
-    //   });
-    // }
-  } //componentDidUpdate
+  onButtonClick = event => {
+    const buttonValue = event.target.name
+    console.log('0. onButtonClick - buttonValue: ', buttonValue)
+    // console.log('1. onButtonClick - setConnectionExistsToFalse...')
+    // this.setConnectionExistsToFalse() //first setConnectionExistsToFalse, to stop disconnect Yjs...
+    console.log('2. onButtonClick - ...then setState to new showRoom...')
+    this.setState({
+      showRoom: buttonValue,
+    })
+    // this.setState({
+    //   showRoom: buttonValue,
+    // }, () => {
+    //   this.setConnectionExistsToTrue()
+    // }) //next set state to show the room user clicked, and then setConnectionExistsToTrue, to render Yjs
+    // console.log('3. onButtonClick - ...and connectionExists to true')
+  }
+
+  handleColorBorder(string) {
+    var colorBorder
+    if (string === 'room1') {
+      colorBorder = {border:'2px solid blue',}
+    }
+    if (string === 'room2') {
+      colorBorder = {border:'2px solid red',}
+    }
+    if (string === 'room3') {
+      colorBorder = {border:'2px solid yellow',}
+    }
+    return colorBorder
+  }
+
+  setConnectionExistsToTrue() {
+    console.log('calling setConnectionExistsToTrue...')
+    this.setState({ connectionExists: true });
+    // console.log('TextEditContainer - STATE NOW - this.state is: ', this.state)
+  }
+
+  setConnectionExistsToFalse() {
+    console.log('calling setConnectionExistsToFalse...')
+    this.setState({ connectionExists: false });
+    // console.log('TextEditContainer - STATE NOW - this.state is: ', this.state)
+  }
+
 
   render() {
-    // console.log('in TextEditContainer, this.state is: ', this.state)
+
+    console.log('TextEditContainer - render - this.state is: ', this.state)
     return (
-      <div>
+      <div className='TextEditContainer-style'>
 
         <h2>
-          Here's the TextEditContainer.
+          TextEditContainer
         </h2>
 
-        <Clock
-          timestamp={this.state.timestamp}
-        />
+        {/* <div className="choiceBox">
+          <p>
+            Other state updates don't affect Yjs.
+          </p>
+          <button id="a" name="a" onClick={this.onChoiceClick}   className='blueButton'>Choice A</button>
+          <button id="b" name="b" onClick={this.onChoiceClick}    className='redButton'>Choice B</button>
+          <button id="c" name="c" onClick={this.onChoiceClick} className='yellowButton'>Choice C</button>
+          <p>
+            Choice: {this.state.choice ? this.state.choice : 'chosen one here'}
+          </p>
+        </div> */}
 
-        <form action="" id="myFormEdit">
-          <textarea id="textareaEdit"
-            rows="10"
-            cols="80"
-            placeholder="textarea inside TextEditContainer..."
-            value={this.state.text}
-            onChange={this.handleTextChange}
-            >
-          </textarea>
+        <button id="showRoom1" name="room1" onClick={this.onButtonClick}   className='blueButton'>Show Room 1</button>
+        <button id="showRoom2" name="room2" onClick={this.onButtonClick}    className='redButton'>Show Room 2</button>
+        <button id="showRoom3" name="room3" onClick={this.onButtonClick} className='yellowButton'>Show Room 3</button>
 
-        </form>
+        <p>
+          Active Room: <span style={this.handleColorBorder(this.state.showRoom)}>
+            {this.state.showRoom ? this.state.showRoom : "room name goes here..."}
+          </span>
+        </p>
 
+        {/* <button onClick={this.setConnectionExistsToTrue} className='blueButton'>Connection Exists</button> */}
+
+        {/* <div>
           <TextEdit
-            textFromContainer={this.state.text}
+            showRoom={this.state.showRoom} //this is only prop that TextEdit needs!!!
+            connectionExists={this.state.connectionExists}
+            handleColorBorder={this.handleColorBorder}
           />
+        </div> */}
 
-          {/* <textarea
-            rows="5" cols="50"
-            value={this.state.text}
-            readOnly
-            >
-            </textarea> */}
+        <div>
+          <TextEdit
+            showRoom={'room1'} //this is only prop that TextEdit needs!!!
+            connectionExists={this.state.connectionExists}
+            handleColorBorder={this.handleColorBorder}
+          />
+        </div>
 
-          </div>
-        );
-      }
-    }
+        <div>
+          <TextEdit
+            showRoom={'room2'} //this is only prop that TextEdit needs!!!
+            connectionExists={this.state.connectionExists}
+            handleColorBorder={this.handleColorBorder}
+          />
+        </div>
 
-    export default TextEditContainer;
+        <div>
+          <TextEdit
+            showRoom={'room3'} //this is only prop that TextEdit needs!!!
+            connectionExists={this.state.connectionExists}
+            handleColorBorder={this.handleColorBorder}
+          />
+        </div>
+
+      </div>
+    );
+  }
+}
+
+export default TextEditContainer;
