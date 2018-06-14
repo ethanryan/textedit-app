@@ -11,7 +11,12 @@ require('y-websockets-client')(Y)
 var io = Y['websockets-client'].io //need to get this.....
 
 
-var link = 'http://localhost:1234'
+// var link = 'http://localhost:1234' //when running textedit-app-yjs-websockets-server locally
+// var link = 'http://localhost:5000' //when running `heroku local web`
+var link = process.env.REACT_APP_YJS_HEROKU_URL //this link is set in my .env file, which is hidden from github
+
+// running 'heroku logs --tail' to view logging from heroku server...
+// should i 'hide' the above link in an env file???
 // var link = heroku server link will go here, when i host 'textedit-app-yjs-websockets-server' on heroku
 
 // create a connection
