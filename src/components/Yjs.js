@@ -103,10 +103,12 @@ class Yjs extends Component {
         y.share.textarea.bind(document.getElementById(that.props.showRoom))
         // y.share.textarea.bind(document.querySelector('textarea')) //this will show only first room...
 
+        y.share.textarea.insert(0, `initial text for ${that.props.showRoom} here...`) //then give each room some initial text...
+
         console.log('HELLO from y promise!!!')
         console.log('y is: ', y)
-        console.log('y.connector.userId is: ', y.connector.userId)
-        console.log('y.connector.connections is: ', y.connector.connections)
+        // console.log('y.connector.userId is: ', y.connector.userId)
+        // console.log('y.connector.connections is: ', y.connector.connections)
 
         //don't need below if statement with if (this.props.connectionExists === false) above...
         if (that.props.connectionExists === false) {
