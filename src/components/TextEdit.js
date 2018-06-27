@@ -5,6 +5,16 @@ import Yjs from '../components/Yjs.js';
 
 class TextEdit extends Component {
 
+  // comment out the below to re-render TextEdit on every click -- using this life cycle method to prevent TextEdit and Yjs from needlessly re-rendering, note: React docs say NOT to use this method for this purpose
+shouldComponentUpdate(nextProps) {
+  if (this.props.connectionExists === nextProps.connectionExists) { //these two should always be equal...
+    console.warn('TextEdit - (this.props.connectionExists === nextProps.connectionExists), so returning FALSE in shouldComponentUpdate... AKA no re-render...')
+    return false; // don't re-render this component (or its children) if the only state change is "a", "b", or "c" getting clicked...
+  } else {
+    return true; //default return value for shouldComponentUpdate is true
+  }
+}
+
   render() {
     console.log('TextEdit - render - this.props is: ', this.props)
 
