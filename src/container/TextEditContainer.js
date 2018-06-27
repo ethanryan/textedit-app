@@ -46,13 +46,13 @@ class TextEditContainer extends Component {
 
   handleColorBorder(string) {
     var colorBorder
-    if (string === 'room1') {
+    if (string === 'room1' || string === 'a') {
       colorBorder = {border:'2px solid blue',}
     }
-    if (string === 'room2') {
+    if (string === 'room2' || string === 'b') {
       colorBorder = {border:'2px solid red',}
     }
-    if (string === 'room3') {
+    if (string === 'room3' || string === 'c') {
       colorBorder = {border:'2px solid yellow',}
     }
     return colorBorder
@@ -81,7 +81,7 @@ class TextEditContainer extends Component {
           TextEditContainer
         </h2>
 
-        {/* <div className="choiceBox">
+        <div className="choiceBox">
           <p>
             Other state updates don't affect Yjs.
           </p>
@@ -89,11 +89,13 @@ class TextEditContainer extends Component {
           <button id="b" name="b" onClick={this.onChoiceClick}    className='redButton'>Choice B</button>
           <button id="c" name="c" onClick={this.onChoiceClick} className='yellowButton'>Choice C</button>
           <p>
-            Choice: {this.state.choice ? this.state.choice : 'chosen one here'}
+            Choice: <span style={this.handleColorBorder(this.state.choice)}>
+              {this.state.choice ? this.state.choice : 'chosen one here'}
+              </span>
           </p>
-        </div> */}
+        </div>
 
-        <button id="showRoom1" name="room1" onClick={this.onButtonClick}   className='blueButton'>Show Room 1</button>
+        {/* <button id="showRoom1" name="room1" onClick={this.onButtonClick}   className='blueButton'>Show Room 1</button>
         <button id="showRoom2" name="room2" onClick={this.onButtonClick}    className='redButton'>Show Room 2</button>
         <button id="showRoom3" name="room3" onClick={this.onButtonClick} className='yellowButton'>Show Room 3</button>
 
@@ -101,17 +103,7 @@ class TextEditContainer extends Component {
           Active Room: <span style={this.handleColorBorder(this.state.showRoom)}>
             {this.state.showRoom ? this.state.showRoom : "room name goes here..."}
           </span>
-        </p>
-
-        {/* <button onClick={this.setConnectionExistsToTrue} className='blueButton'>Connection Exists</button> */}
-
-        {/* <div>
-          <TextEdit
-            showRoom={this.state.showRoom} //this is only prop that TextEdit needs!!!
-            connectionExists={this.state.connectionExists}
-            handleColorBorder={this.handleColorBorder}
-          />
-        </div> */}
+        </p> */}
 
         <div>
           <TextEdit
