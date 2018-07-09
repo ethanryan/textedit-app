@@ -100,11 +100,26 @@ class Yjs extends Component {
         }
       }).then(function (y) {
         // bind the textarea to a shared text element
-        y.share.textarea.bind(document.getElementById(that.props.showRoom))
+        // y.share.textarea.bind(document.getElementById(that.props.showRoom))
         // y.share.textarea.bind(document.querySelector('textarea')) //this will show only first room...
 
-        y.share.textarea.delete(0, y.share.textarea._content.length) //first clear all text from y.share.textarea...
-        y.share.textarea.insert(0, `initial text for ${that.props.showRoom} here...`) //then give each room some initial text...
+        if (that.props.texteditorIsSummernote === true) {
+          console.warn('Yjs ---->>> this Yjs is being rendered by a Summernote text editor!!!')
+          console.warn('Yjs --->>>> that.props.showRoom is: ', that.props.showRoom)
+          // bind the textarea to a shared text element
+          // y.share.textarea.bind(document.getElementsByClassName("note-editable"))
+          // y.share.text.bind(document.querySelector("div[contenteditable]")) //// bind text to the first p element that is contenteditable, via: https://github.com/y-js/y-text
+          y.share.textarea.bind(document.querySelector("div[contenteditable]")) //// bind text to the first p element that is contenteditable, via: https://github.com/y-js/y-text
+
+          y.share.textarea.delete(0, y.share.textarea._content.length) //first clear all text from y.share.textarea...
+          y.share.textarea.insert(0, `initial text for ${that.props.showRoom} here...`) //then give each room some initial text...
+        }
+
+        else {
+          y.share.textarea.bind(document.getElementById(that.props.showRoom)) // bind the textarea to a shared text element...
+          y.share.textarea.delete(0, y.share.textarea._content.length) //first clear all text from y.share.textarea...
+          y.share.textarea.insert(0, `initial text for ${that.props.showRoom} here...`) //then give each room some initial text...
+        }
 
         console.log('HELLO from y promise!!!')
         console.log('y is: ', y)
