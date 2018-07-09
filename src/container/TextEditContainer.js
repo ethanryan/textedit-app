@@ -105,6 +105,9 @@ class TextEditContainer extends Component {
           </span>
         </p> */}
 
+        {/* add Summernote texteditor here... */}
+        {/* or Quill texteditor, or whatever... */}
+
         <div>
           <TextEdit
             showRoom={'room1'} //this is only prop that TextEdit needs!!!
