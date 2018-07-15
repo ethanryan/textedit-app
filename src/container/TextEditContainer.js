@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 // import Clock from '../components/Clock.js';
 import TextEdit from '../components/TextEdit.js';
 import Summernote from '../components/Summernote.js';
+import Quill from '../components/Quill.js';
 
 class TextEditContainer extends Component {
   constructor() {
@@ -108,7 +109,7 @@ class TextEditContainer extends Component {
         {/* or Quill texteditor, or whatever... */}
 
         <div>
-          <Summernote
+          <Quill
             showRoom={'room999'} //this is only prop that TextEdit needs!!!
             connectionExists={this.state.connectionExists}
             handleColorBorder={this.handleColorBorder}
