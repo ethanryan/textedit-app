@@ -109,6 +109,14 @@ class TextEditContainer extends Component {
 
         <div>
           <Summernote
+            showRoom={'room999'} //this is only prop that TextEdit needs!!!
+            connectionExists={this.state.connectionExists}
+            handleColorBorder={this.handleColorBorder}
+          />
+        </div>
+
+        <div>
+          <Summernote
             showRoom={'room0'} //this is only prop that TextEdit needs!!!
             connectionExists={this.state.connectionExists}
             handleColorBorder={this.handleColorBorder}
