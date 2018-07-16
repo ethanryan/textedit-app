@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+// import ReactQuill from 'react-quill'; // ES6
+
 const Y = require('yjs')
 
 // YjsQuill plugins
@@ -27,35 +29,6 @@ class YjsQuill extends Component {
     console.log('YjsQuill - componentDidMount - this.props.showRoom is: ', this.props.showRoom)
   }
 
-  // componentDidUpdate(prevProps, prevState, snapshot)
-  // componentDidUpdate(prevProps, prevState, snapshot) {
-  //   console.log('YjsQuill - componentDidUpdate - this.props is: ', this.props)
-  //   console.log('YjsQuill - componentDidUpdate - prevProps is: ', prevProps)
-  //   if (this.props !== prevProps) {
-  //     console.log('oh no --->>> this.props !== prevProps in YjsQuill...')
-  //   }
-  // }
-
-
-
-  // destroyUserClicked = event => {
-  //   const buttonValue = event.target.name
-  //   console.log('YjsQuill - destroyUserClicked called -->>> buttonValue: ', buttonValue)
-  //   this.destroyUser() //calling function above...
-  // }
-  //
-  // disconnectRoomClicked = event => {
-  //   const buttonValue = event.target.name
-  //   console.log('YjsQuill - disconnectRoomClicked called -->>> buttonValue: ', buttonValue)
-  //   this.disconnectUser() //calling function above...
-  // }
-  //
-  // reconnectRoomClicked = event => {
-  //   const buttonValue = event.target.name
-  //   console.log('YjsQuill - reconnectRoomClicked called -->> buttonValue: ', buttonValue)
-  //   this.reconnectUser() //calling fuction above...
-  // }
-
 
   render() {
 
@@ -64,7 +37,7 @@ class YjsQuill extends Component {
 
     console.log('YjsQuill - render - this.props is: ', this.props)
 
-    var that = this; //setting 'this' to 'that' so scope of 'this' doesn't get lost in promise below
+    // var that = this; //setting 'this' to 'that' so scope of 'this' doesn't get lost in promise below
 
     console.log('YjsQuill -->>> connection in render is: ', connection)
     console.log('YjsQuill -->>> connection.connected in render is: ', connection.connected)
@@ -106,15 +79,22 @@ class YjsQuill extends Component {
       }).then(function (y) {
         window.yquill = y
 
+        var element = document.getElementById('roomFUCK');
+
         // create quill element
-        window.quill = new Quill('#editor', {
-          modules: {
-            'toolbar': { container: '#toolbar' },
-            'link-tooltip': true
-          },
-          theme: 'snow'
-        })
+        // window.quill = ('#editor')
+        window.quill = (element)
+
+        // window.quill = new Quill('#editor', {
+        //   modules: {
+        //     'toolbar': { container: '#toolbar' },
+        //     'link-tooltip': true
+        //   },
+        //   theme: 'snow'
+        // })
+
         // bind quill to richtext type
+        //NOTE: NEED TO INCLUDE BELOW LINE:::::::
         y.share.richtext.bindQuill(window.quill)
       })
 

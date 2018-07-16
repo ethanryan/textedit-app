@@ -3,7 +3,9 @@ import React, { Component } from 'react';
 // import Clock from '../components/Clock.js';
 import TextEdit from '../components/TextEdit.js';
 import Summernote from '../components/Summernote.js';
-import Quill from '../components/Quill.js';
+
+import QuillEditor from '../components/QuillEditor.js';
+import YjsQuill from '../components/YjsQuill.js';
 
 class TextEditContainer extends Component {
   constructor() {
@@ -108,13 +110,22 @@ class TextEditContainer extends Component {
         {/* add Summernote texteditor here... */}
         {/* or Quill texteditor, or whatever... */}
 
-        <div>
-          <Quill
+        <div style={{border: "10px solid orange"}}>
+          <QuillEditor
             showRoom={'room999'} //this is only prop that TextEdit needs!!!
             connectionExists={this.state.connectionExists}
             handleColorBorder={this.handleColorBorder}
           />
         </div>
+
+        {/* <div>
+          <YjsQuill
+            showRoom={'roomFUCK'} //this is only prop that TextEdit needs!!!
+            connectionExists={this.state.connectionExists}
+            handleColorBorder={this.handleColorBorder}
+          />
+        </div> */}
+
 
         <div>
           <Summernote
