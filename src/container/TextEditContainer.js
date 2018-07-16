@@ -110,13 +110,15 @@ class TextEditContainer extends Component {
         {/* add Summernote texteditor here... */}
         {/* or Quill texteditor, or whatever... */}
 
-        <div style={{border: "10px solid orange"}}>
+        <div style={{border: "1px solid orange"}}>
+        <div>
           <QuillEditor
             showRoom={'room999'} //this is only prop that TextEdit needs!!!
             connectionExists={this.state.connectionExists}
             handleColorBorder={this.handleColorBorder}
           />
         </div>
+      </div>
 
         {/* <div>
           <YjsQuill

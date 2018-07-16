@@ -3,6 +3,22 @@ import React, { Component } from 'react';
 // import ReactQuill from 'react-quill'; // ES6
 import Quill from 'quill/core';
 
+import Toolbar from 'quill/modules/toolbar';
+import Snow from 'quill/themes/snow';
+
+import Bold from 'quill/formats/bold';
+import Italic from 'quill/formats/italic';
+import Header from 'quill/formats/header';
+
+Quill.register({
+  'modules/toolbar': Toolbar,
+  'themes/snow': Snow,
+  'formats/bold': Bold,
+  'formats/italic': Italic,
+  'formats/header': Header
+});
+
+
 const Y = require('yjs')
 
 // YjsQuill plugins
@@ -80,19 +96,31 @@ class YjsQuill extends Component {
       }).then(function (y) {
         window.yquill = y
 
-        // create quill element
-        var options = {
-          debug: 'info',
-          // modules: {
-          //   toolbar: '#toolbar'
-          // },
+        window.quill = new Quill('#editor-container', {
+          modules: {
+            toolbar: [
+              [{ header: [1, 2, false] }],
+              ['bold', 'italic', 'underline'],
+              ['image', 'code-block']
+            ]
+          },
           placeholder: 'Compose an epic...',
-          readOnly: false,
-          // theme: 'snow'
-          theme: null
-        };
-        // var editor = new Quill('#editor', options);
-        window.quill = new Quill('#editor', options);
+          theme: 'snow'  // or 'bubble'
+        });
+
+        // create quill element
+        // var options = {
+        //   debug: 'info',
+        //   modules: {
+        //     toolbar: '#toolbar'
+        //   },
+        //   placeholder: 'Compose an epic...',
+        //   readOnly: false,
+        //   theme: 'snow'
+        //   // theme: null
+        // };
+        // // var editor = new Quill('#editor', options);
+        // window.quill = new Quill('#editor', options);
 
         // bind quill to richtext type
         //NOTE: NEED TO INCLUDE BELOW LINE:::::::
