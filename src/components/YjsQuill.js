@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 // import ReactQuill from 'react-quill'; // ES6
+import Quill from 'quill/core';
 
 const Y = require('yjs')
 
@@ -79,19 +80,19 @@ class YjsQuill extends Component {
       }).then(function (y) {
         window.yquill = y
 
-        var element = document.getElementById('roomFUCK');
-
         // create quill element
-        // window.quill = ('#editor')
-        window.quill = (element)
-
-        // window.quill = new Quill('#editor', {
-        //   modules: {
-        //     'toolbar': { container: '#toolbar' },
-        //     'link-tooltip': true
-        //   },
-        //   theme: 'snow'
-        // })
+        var options = {
+          debug: 'info',
+          // modules: {
+          //   toolbar: '#toolbar'
+          // },
+          placeholder: 'Compose an epic...',
+          readOnly: false,
+          // theme: 'snow'
+          theme: null
+        };
+        // var editor = new Quill('#editor', options);
+        window.quill = new Quill('#editor', options);
 
         // bind quill to richtext type
         //NOTE: NEED TO INCLUDE BELOW LINE:::::::
