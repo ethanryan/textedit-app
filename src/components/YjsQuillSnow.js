@@ -128,7 +128,7 @@ class YjsQuill extends Component {
 
 
     return (
-      <div className="YjsQuill-style">
+      <div className="Yjs-style">
 
         {/* <h3>
           YjsQuill component - connectionExists: {this.props.connectionExists ? "true" : "false"}

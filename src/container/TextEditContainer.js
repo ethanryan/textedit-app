@@ -50,6 +50,9 @@ class TextEditContainer extends Component {
 
   handleColorBorder(string) {
     var colorBorder
+    if (string === 'room0' || string === 'xxx') {
+      colorBorder = {border:'2px solid orange',}
+    }
     if (string === 'room1' || string === 'a') {
       colorBorder = {border:'2px solid blue',}
     }
@@ -109,15 +112,15 @@ class TextEditContainer extends Component {
           </span>
         </p> */}
 
-        <div style={{border: "1px solid orange"}}>
+        {/* <div style={{border: "1px solid orange"}}> */}
           <div>
             <QuillEditorSnow
-              showRoom={'room1'} //this is only prop that TextEdit needs!!!
+              showRoom={'room0'} //this is only prop that TextEdit needs!!!
               connectionExists={this.state.connectionExists}
               handleColorBorder={this.handleColorBorder}
             />
           </div>
-        </div>
+        {/* </div> */}
 
         {/* <div>
           <Summernote

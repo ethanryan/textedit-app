@@ -61,7 +61,8 @@ html {
 /* below this line is css for QuillEditorSnow */
 
 .standalone-container {
-  margin: 50px auto;
+  margin-bottom: 50px;
+  /* margin: 50px auto; */
   /* max-width: 720px; */
 }
 
@@ -71,7 +72,7 @@ html {
 }
 
 .ql-toolbar {
-  background: lightgray;
+  background: azure;
 }
 
 .ql-editor {
