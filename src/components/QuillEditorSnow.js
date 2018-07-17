@@ -1,12 +1,7 @@
 import React from 'react';
 
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-
-// import { faCoffee } from '@fortawesome/free-solid-svg-icons'
-// import { faStroopwafel } from '@fortawesome/free-solid-svg-icons'
-
 // import 'quill/dist/quill.core.css';
-import 'quill/dist/quill.snow.css'; //need to import this for snow theme to display correctly...
+import 'quill/dist/quill.snow.css'; //need to import this for snow CSS to display correctly...
 
 import Quill from 'quill/core'; //must be from core for functions to work!!!
 import Toolbar from 'quill/modules/toolbar';
