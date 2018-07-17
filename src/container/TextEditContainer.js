@@ -2,12 +2,10 @@ import React, { Component } from 'react';
 
 // import Clock from '../components/Clock.js';
 import TextEdit from '../components/TextEdit.js';
-import Summernote from '../components/Summernote.js';
+// import Summernote from '../components/Summernote.js';
 
-import QuillEditor from '../components/QuillEditor.js';
+// import QuillEditor from '../components/QuillEditor.js';
 import QuillEditorSnow from '../components/QuillEditorSnow.js';
-
-import YjsQuill from '../components/YjsQuill.js';
 
 class TextEditContainer extends Component {
   constructor() {
