@@ -57,3 +57,29 @@ html {
   padding-bottom: 2px;
   background: lightgray;
 }
+
+/* below this line is css for QuillEditorSnow */
+
+.standalone-container {
+  margin: 50px auto;
+  /* max-width: 720px; */
+}
+
+#QuillEditorSnow-container {
+  height: 150px;
+  text-align: justify;
+}
+
+.ql-toolbar {
+  background: lightgray;
+}
+
+.ql-editor {
+  background: white;
+}
+
+.ql-picker-label::after {
+  padding-left: 10%;
+  content: "\f0dc"; /* this is the sort font */
+  font-family: FontAwesome;  /* need this! */
+}
