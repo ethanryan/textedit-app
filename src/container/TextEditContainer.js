@@ -86,7 +86,7 @@ class TextEditContainer extends Component {
           TextEditContainer
         </h2>
 
-        <div className="choiceBox">
+        {/* <div className="choiceBox">
           <p>
             Other state updates don't affect Yjs.
           </p>
@@ -98,7 +98,7 @@ class TextEditContainer extends Component {
               {this.state.choice ? this.state.choice : 'chosen one here'}
               </span>
           </p>
-        </div>
+        </div> */}
 
         {/* <button id="showRoom1" name="room1" onClick={this.onButtonClick}   className='blueButton'>Show Room 1</button>
         <button id="showRoom2" name="room2" onClick={this.onButtonClick}    className='redButton'>Show Room 2</button>
