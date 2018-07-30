@@ -58,10 +58,10 @@ html {
   background: lightgray;
 }
 
-/* below this line is css for QuillEditorSnow */
+/* below this line is css for QuillEditor */
 
-#QuillEditorSnow-container {
-  height: 150px;
+#QuillEditor-container {
+  height: 120px;
   text-align: justify;
 }
 
