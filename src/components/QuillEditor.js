@@ -2,48 +2,22 @@ import React from 'react';
 
 import YjsQuill from './YjsQuill';
 
-
-import Quill from 'quill/core';
-import Toolbar from 'quill/modules/toolbar';
-import Snow from 'quill/themes/snow';
-
-import Bold from 'quill/formats/bold';
-import Italic from 'quill/formats/italic';
-import Header from 'quill/formats/header';
-
-
-
-
 class QuillEditor extends React.Component {
 
   componentDidMount() {
     console.warn('1. QuillEditor - componentDidMount...')
-    // create quill element
-    // var options = {
-    //   debug: 'info',
-    //   modules: {
-    //     toolbar: {
-    //       container: '#toolbar',  // Selector for toolbar container
-    //     }
-    //     // Equivalent to { toolbar: { container: '#toolbar' }}
-    //     // toolbar: '#toolbar'
-    //   },
-    //   placeholder: 'Compose an epic...',
-    //   readOnly: false,
-    //   theme: 'snow'
-    //   // theme: null
-    // };
-    // // var editor = new Quill('#editor', options);
-    // var quill = new Quill('#editor', options);
-
-
-
   } //componentDidMount
-
+  
   render() {
     console.warn('0. QuillEditor - render...')
     return (
-      <div>
+      <div className='TextEdit-style'>
+
+        <p>
+          <span style={this.props.handleColorBorder(this.props.showRoom)}>
+            QuillEditor: {this.props.showRoom}
+          </span>
+        </p>
 
         <YjsQuill
           showRoom={this.props.showRoom} //this is only prop that TextEdit needs!!!
@@ -51,19 +25,21 @@ class QuillEditor extends React.Component {
           handleColorBorder={this.props.handleColorBorder}
         />
 
-        <p>
-          QuillEditor - this.props.showRoom: {this.props.showRoom}
-        </p>
-        {/* new example, from codepen: */}
-        <div id="editor-container"></div>
-
-        {/* Create toolbar container, outside of editor... */}
-        <div id="toolbar"></div>
-
-        {/* Create the editor container... */}
-        <div id="editor">
-          {/* <p>Some initial <strong>bold</strong> text</p> */}
-        </div>
+        {
+          (this.props.connectionExists === true) ?
+          /* <!-- Create the editor container --> */
+          <div id="QuillEditor-container">
+            <div id="editor">
+              <p>Hello World!</p>
+              <p>Some initial <strong>bold</strong> text</p>
+              <p></p>
+            </div>
+          </div>
+          :
+          <div>
+            LOADING...
+          </div>
+        }
 
       </div>
     )

@@ -1,25 +1,4 @@
-import React, { Component } from 'react';
-
-// import ReactQuill from 'react-quill'; // ES6
-import Quill from 'quill/core';
-
-import Toolbar from 'quill/modules/toolbar';
-import Snow from 'quill/themes/snow';
-
-import Bold from 'quill/formats/bold';
-import Italic from 'quill/formats/italic';
-import Header from 'quill/formats/header';
-
-// import * from 'https://cdn.quilljs.com/1.3.6/quill.snow.css';
-
-Quill.register({
-  'modules/toolbar': Toolbar,
-  'themes/snow': Snow,
-  'formats/bold': Bold,
-  'formats/italic': Italic,
-  'formats/header': Header
-});
-
+import React from 'react';
 
 const Y = require('yjs')
 
@@ -41,7 +20,7 @@ var connection = io(link) //need to include LINK within io()...
 
 
 
-class YjsQuill extends Component {
+class YjsQuill extends React.Component {
 
   componentDidMount() {
     console.log('YjsQuill - componentDidMount - this.props is: ', this.props)
@@ -89,20 +68,40 @@ class YjsQuill extends Component {
         share: {
           richtext: 'Richtext' // y.share.richtext is of type Y.Richtext
         }
-      }).then(function (y) {
+      // }).then(function (y) {
+      }).then( (y) => {
+
         window.yquill = y
 
-        window.quill = new Quill('#editor-container', {
-          modules: {
-            toolbar: [
-              [{ header: [1, 2, false] }],
-              ['bold', 'italic', 'underline'],
-              ['image', 'code-block']
-            ]
-          },
-          placeholder: 'Compose an epic...',
-          theme: 'snow'  // or 'bubble'
+        var toolbarOptions = [
+          // custom dropdown
+          [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+          [{ 'size': ['small', false, 'large', 'huge'] }],
+          [{ 'font': [] }],
+          ['bold', 'italic', 'underline', 'strike', 'link'],
+          [{ 'color': [] }, { 'background': [] }],        // toggled buttons
+          ['blockquote', 'code-block'],
+          ['video', 'image'],
+          [{ 'align': [] }],
+          [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+          [{ 'script': 'sub'}, { 'script': 'super' }],      // superscript/subscript
+          [{ 'indent': '-1'}, { 'indent': '+1' }],          // outdent/indent
+          [{ 'direction': 'rtl' }],                         // text direction
+          ['clean']                                         // remove formatting button
+        ];
+
+        window.quill = new window.Quill('#editor', {
+        modules: {
+          toolbar: toolbarOptions,
+        },
+        theme: 'snow',
+        placeholder: "Write something awesome..."
         });
+
+        // window.quill = new Quill('#editor', {
+        //   theme: 'snow' //this needs to come after the above, which registers Snow...
+        // });
+
         // bind quill to richtext type
         //NOTE: NEED TO INCLUDE BELOW LINE:::::::
         y.share.richtext.bindQuill(window.quill)
@@ -111,7 +110,7 @@ class YjsQuill extends Component {
 
 
     return (
-      <div className="YjsQuill-style">
+      <div className="Yjs-style">
 
         {/* <h3>
           YjsQuill component - connectionExists: {this.props.connectionExists ? "true" : "false"}

@@ -50,7 +50,7 @@ shouldComponentUpdate(nextProps) {
               id={this.props.showRoom ? this.props.showRoom : "room name goes here..."}
               rows="4"
               cols="80"
-              placeholder="textarea inside TextEditContainer..."
+              placeholder={`textarea inside ${this.props.showRoom}...`}
               >
             </textarea>
           </div>
