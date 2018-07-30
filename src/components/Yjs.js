@@ -10,6 +10,7 @@ require('y-websockets-client')(Y)
 
 var io = Y['websockets-client'].io //need to get this.....
 
+// NOTE: eliminated React warning by following directions in console.info in ./node_modules/yjs/src/y.js
 
 // var link = 'http://localhost:1234' //when running textedit-app-yjs-websockets-server locally
 // var link = 'http://localhost:5000' //when running `heroku local web`
