@@ -1,6 +1,6 @@
 import React from 'react';
 
-import YjsQuillSnow from './YjsQuillSnow';
+import YjsQuill from './YjsQuill';
 
 class QuillEditor extends React.Component {
 
@@ -20,7 +20,7 @@ class QuillEditor extends React.Component {
           </span>
         </p>
 
-        <YjsQuillSnow
+        <YjsQuill
           showRoom={this.props.showRoom} //this is only prop that TextEdit needs!!!
           connectionExists={this.props.connectionExists}
           handleColorBorder={this.props.handleColorBorder}

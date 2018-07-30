@@ -2,10 +2,8 @@ import React, { Component } from 'react';
 
 // import Clock from '../components/Clock.js';
 import TextEdit from '../components/TextEdit.js';
-// import Summernote from '../components/Summernote.js';
 
-// import QuillEditor from '../components/QuillEditor.js';
-import QuillEditorSnow from '../components/QuillEditorSnow.js';
+import QuillEditor from '../components/QuillEditor.js';
 
 class TextEditContainer extends Component {
   constructor() {
@@ -111,7 +109,7 @@ class TextEditContainer extends Component {
         </p> */}
 
         <div>
-          <QuillEditorSnow
+          <QuillEditor
             showRoom={'room0'} //this is only prop that TextEdit needs!!!
             connectionExists={this.state.connectionExists}
             handleColorBorder={this.handleColorBorder}
