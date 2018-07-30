@@ -6,9 +6,8 @@ class QuillEditor extends React.Component {
 
   componentDidMount() {
     console.warn('1. QuillEditor - componentDidMount...')
-
   } //componentDidMount
-
+  
   render() {
     console.warn('0. QuillEditor - render...')
     return (
@@ -29,16 +28,6 @@ class QuillEditor extends React.Component {
         {
           (this.props.connectionExists === true) ?
           /* <!-- Create the editor container --> */
-          <div id="editor">
-            {/* <div className="progress"> */}
-              {/* <div className="indeterminate"></div> */}
-            {/* </div> */}
-          </div>
-          :
-          "Loading..."
-        }
-
-        {/* <div className="standalone-container">
           <div id="QuillEditor-container">
             <div id="editor">
               <p>Hello World!</p>
@@ -46,7 +35,11 @@ class QuillEditor extends React.Component {
               <p></p>
             </div>
           </div>
-        </div> */}
+          :
+          <div>
+            LOADING...
+          </div>
+        }
 
       </div>
     )
